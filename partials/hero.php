@@ -9,7 +9,7 @@
       <p class="hero__lead lead">A tag Getpet tem <strong>NFC e QR Code</strong>. Quem encontrar seu pet aproxima o celular e, na hora, vê o cartão dele com o jeito certo de falar com você.</p>
 
       <div class="hero__actions">
-        <a class="btn btn--primary" href="<?= e($wa) ?>" target="_blank" rel="noopener">
+        <a class="btn btn--primary" href="<?= e($wa) ?>"<?= link_attrs($wa) ?>>
           <?php include __DIR__ . '/icon-whatsapp.php'; ?>
           Quero minha tag
         </a>

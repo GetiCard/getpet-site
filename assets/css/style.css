@@ -63,6 +63,10 @@ h1, h2, h3, h4 { font-family: var(--font-title); font-weight: 700; line-height: 
 button { font: inherit; color: inherit; }
 
 :focus-visible { outline: 3px solid var(--purple); outline-offset: 3px; border-radius: 8px; }
+/* Em fundos escuros/verdes o roxo some: usa amarelo (> 3:1) */
+.final-cta :focus-visible,
+.site-footer :focus-visible,
+.section--red :focus-visible { outline-color: var(--yellow); }
 
 .sr-only {
   position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
@@ -220,6 +224,7 @@ main { overflow-x: clip; }
   .nav-app { border-top: 2px dashed #E3DCC8; border-radius: 0 0 14px 14px; margin-top: 4px; }
   .site-header .container { position: relative; }
 }
+@media (max-width: 899px) { html:not(.js) .site-header { position: static; } }
 @media (max-width: 899px) { html:not(.js) .nav-toggle { display: none; } }
 @media (max-width: 899px) { html:not(.js) .nav-menu { position: static; margin-top: 10px; } }
 @media (max-width: 899px) { html:not(.js) .nav-bar { flex-wrap: wrap; border-radius: var(--radius); } }

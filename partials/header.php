@@ -23,7 +23,7 @@ $navLinks = [
         <a class="nav-app" href="<?= e($config['app_url']) ?>" target="_blank" rel="noopener">Entrar no app</a>
       </nav>
 
-      <a class="btn btn--primary btn--sm nav-cta" href="<?= e($wa) ?>" target="_blank" rel="noopener">Quero minha tag</a>
+      <a class="btn btn--primary btn--sm nav-cta" href="<?= e($wa) ?>"<?= link_attrs($wa) ?>>Quero minha tag</a>
 
       <button class="nav-toggle" type="button" data-menu-toggle aria-controls="menu" aria-expanded="false">
         <span class="nav-toggle__bars" aria-hidden="true"></span>

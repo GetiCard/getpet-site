@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 require __DIR__ . '/lib/helpers.php';
-$config = require __DIR__ . '/config.php';
+$config ??= require __DIR__ . '/config.php'; // os testes podem injetar outra configuração
 
 // Link padrão do WhatsApp (CTA "Quero minha tag").
 $wa = wa_link($config['whatsapp'], $config['wa_message']);

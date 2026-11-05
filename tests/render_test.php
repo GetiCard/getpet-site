@@ -60,5 +60,18 @@ check('"Em breve" nos 3 modelos', substr_count($html, 'Em breve') === 3);
 check('nenhum preço exibido', !str_contains($html, 'R$'));
 check('index sem guarda provisória', !str_contains((string) file_get_contents($root . '/index.php'), 'TEMP'));
 
+// Fallback: sem número de WhatsApp, os botões rolam até #modelos na mesma aba
+function render_with(array $config): string
+{
+    ob_start();
+    include dirname(__DIR__) . '/index.php';
+    return (string) ob_get_clean();
+}
+$empty = $c;
+$empty['whatsapp'] = '';
+$emptyHtml = render_with($empty);
+check('sem número: nenhum link #modelos abre nova aba', preg_match('/href="#modelos"[^>]*target="_blank"/', $emptyHtml) === 0);
+check('sem número: botões apontam para #modelos', substr_count($emptyHtml, 'href="#modelos"') >= 5);
+
 echo $failures === 0 ? "\nOK\n" : "\n$failures falha(s)\n";
 exit($failures === 0 ? 0 : 1);

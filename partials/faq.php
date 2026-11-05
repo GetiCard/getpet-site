@@ -31,7 +31,7 @@ $faq = [
     <div class="section-head reveal">
       <span class="pill pill--lilac">Dúvidas</span>
       <h2 id="duvidas-title">Perguntas que todo tutor faz</h2>
-      <p class="lead">Não achou a sua? <a class="link" href="<?= e($wa) ?>" target="_blank" rel="noopener">Chame no WhatsApp</a>.</p>
+      <p class="lead">Não achou a sua? <a class="link" href="<?= e($wa) ?>"<?= link_attrs($wa) ?>>Chame no WhatsApp</a>.</p>
     </div>
 
     <div class="faq">

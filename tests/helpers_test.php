@@ -20,7 +20,14 @@ check('e escapa tags, aspas e &', e('<b>"Mel" & \'Bob\'</b>') === '&lt;b&gt;&quo
 check('e(null) vira string vazia', e(null) === '');
 
 // wa_link()
-check('wa_link limpa mascara do numero', wa_link('(98) 9 8347-1218', 'Oi') === 'https://wa.me/98983471218?text=Oi');
+check('wa_link com mascara completa', wa_link('+55 (98) 9 8347-1218', 'Oi') === 'https://wa.me/5598983471218?text=Oi');
+check('wa_link sem DDI adiciona 55 (celular, 11 digitos)', wa_link('(98) 9 8347-1218', 'Oi') === 'https://wa.me/5598983471218?text=Oi');
+check('wa_link sem DDI adiciona 55 (fixo, 10 digitos)', wa_link('(98) 3232-1234', 'Oi') === 'https://wa.me/559832321234?text=Oi');
+check('wa_link aceita numero como int', wa_link(5598983471218, 'Oi') === 'https://wa.me/5598983471218?text=Oi');
+
+// link_attrs(): só links externos abrem em nova aba
+check('link_attrs para https abre nova aba', link_attrs('https://wa.me/55?text=x') === ' target="_blank" rel="noopener"');
+check('link_attrs para ancora nao abre nova aba', link_attrs('#modelos') === '');
 check('wa_link com numero vazio cai em #modelos', wa_link('', 'Oi') === '#modelos');
 check('wa_link com numero sem digitos cai em #modelos', wa_link('abc', 'Oi') === '#modelos');
 check(

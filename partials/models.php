@@ -28,7 +28,8 @@ $tagByModel = ['basic' => 'bone', 'nfc' => 'round', 'location' => 'dark'];
           </ul>
           <div class="model__footer">
             <span class="model__soon">Em breve</span>
-            <a class="btn btn--primary btn--block" href="<?= e(wa_link($config['whatsapp'], $model['message'])) ?>" target="_blank" rel="noopener">
+            <?php $modelHref = wa_link($config['whatsapp'], $model['message']); ?>
+            <a class="btn btn--primary btn--block" href="<?= e($modelHref) ?>"<?= link_attrs($modelHref) ?>>
               <?php include __DIR__ . '/icon-whatsapp.php'; ?>
               Quero este
             </a>

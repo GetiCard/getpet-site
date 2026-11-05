@@ -6,7 +6,7 @@
         <h2 id="cta-final-title">Dê ao seu pet um caminho de volta para casa</h2>
         <p>A tag Getpet está chegando. Chame a gente no WhatsApp e seja um dos primeiros tutores a ter a sua.</p>
         <div class="final-cta__actions">
-          <a class="btn btn--light" href="<?= e($wa) ?>" target="_blank" rel="noopener">
+          <a class="btn btn--light" href="<?= e($wa) ?>"<?= link_attrs($wa) ?>>
             <?php include __DIR__ . '/icon-whatsapp.php'; ?>
             Quero minha tag
           </a>

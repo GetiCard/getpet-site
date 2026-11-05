@@ -19,7 +19,7 @@
     <div class="footer-col">
       <h2 class="footer-title">Fale com a gente</h2>
       <ul>
-        <li><a href="<?= e($wa) ?>" target="_blank" rel="noopener">WhatsApp</a></li>
+        <li><a href="<?= e($wa) ?>"<?= link_attrs($wa) ?>>WhatsApp</a></li>
         <li><a href="https://instagram.com/<?= e($config['instagram']) ?>" target="_blank" rel="noopener">@<?= e($config['instagram']) ?></a></li>
         <li><a href="mailto:<?= e($config['support_email']) ?>"><?= e($config['support_email']) ?></a></li>
       </ul>
@@ -36,7 +36,7 @@
 </footer>
 
 <div class="sticky-cta" data-sticky-cta>
-  <a class="btn btn--primary btn--block" href="<?= e($wa) ?>" target="_blank" rel="noopener">
+  <a class="btn btn--primary btn--block" href="<?= e($wa) ?>"<?= link_attrs($wa) ?>>
     <?php include __DIR__ . '/icon-whatsapp.php'; ?>
     Quero minha tag
   </a>
