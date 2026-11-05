@@ -1,13 +1,10 @@
-<?php $brandLetters = preg_split('//u', 'Getpet', -1, PREG_SPLIT_NO_EMPTY); ?>
 <section class="hero" aria-labelledby="hero-title">
   <div class="container hero__grid">
     <div class="hero__copy">
       <div class="brand-lockup">
-        <img class="brand-lockup__mascot" src="assets/img/logo-mascot.webp" alt="" width="311" height="298">
         <h1 id="hero-title" class="hero__title">
-          <span class="wordmark" aria-hidden="true"><?php foreach ($brandLetters as $i => $letter): ?><span class="wordmark__letter" style="--i:<?= $i ?>"><?= e($letter) ?></span><?php endforeach; ?></span>
-          <span class="sr-only">Getpet:</span>
-          <span class="hero__sub">Tag de identificação com NFC e QR Code para cães e gatos</span>
+          <img class="brand-logo" src="assets/img/logo-getpet.webp" alt="Getpet" width="480" height="454">
+          <span class="hero__sub">Tag de identificação com NFC e QR Code para pets</span>
         </h1>
       </div>
 

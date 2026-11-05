@@ -35,10 +35,10 @@ $faq = [
 
     <div class="faq">
       <?php foreach ($faq as $item): ?>
-        <article class="faq__item">
-          <h3><?= e($item['q']) ?></h3>
+        <details class="faq__item">
+          <summary><?= e($item['q']) ?></summary>
           <p><?= e($item['a']) ?></p>
-        </article>
+        </details>
       <?php endforeach; ?>
     </div>
   </div>

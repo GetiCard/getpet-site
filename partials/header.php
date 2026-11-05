@@ -2,6 +2,7 @@
 $navLinks = [
     'como-funciona' => 'Como funciona',
     'cartao' => 'Cartão',
+    'pet-perdido' => 'Pet perdido',
     'saude' => 'Saúde',
     'modelos' => 'Modelos',
     'duvidas' => 'Dúvidas',

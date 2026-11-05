@@ -41,16 +41,16 @@ foreach (['como-funciona', 'cartao', 'saude', 'modelos', 'duvidas'] as $id) {
 // Topo com a marca primeiro: h1 = Getpet + o que é; a frase emocional vem depois
 preg_match('/<h1[^>]*>(.*?)<\/h1>/s', $html, $h1);
 preg_match('/<span class="sr-only">([^<]*)<\/span>/', $h1[1] ?? '', $srName);
-check('h1 traz o nome Getpet para leitores de tela', trim($srName[1] ?? '') === 'Getpet:');
-check('h1 nomeia a categoria vendida (Taste: copy-headline)', str_contains($h1[1] ?? '', 'Tag de identificação com NFC e QR Code para cães e gatos'));
+check('h1 traz o logo oficial com alt Getpet', preg_match('/<img[^>]*class="brand-logo"[^>]*alt="Getpet"/', $h1[1] ?? '') === 1 || preg_match('/<img[^>]*alt="Getpet"[^>]*class="brand-logo"/', $h1[1] ?? '') === 1);
+check('h1 nomeia a categoria vendida', str_contains($h1[1] ?? '', 'Tag de identificação com NFC e QR Code para pets'));
 check('primeira tela traz um fato com número (Taste: copy-fact)', str_contains($html, '3 modelos de tag'));
 preg_match_all('/<h2[^>]*>(.*?)<\/h2>/s', $html, $h2s);
 $h2Text = array_map(fn ($h) => trim(preg_replace('/\s+/', ' ', strip_tags($h))), $h2s[1]);
 foreach (['Como a tag funciona, em 3 passos', 'O cartão que aparece para quem encontra seu pet', 'Cartaz de pet perdido pronto em um toque', 'Prontuário de saúde do pet no app', 'Acesso do veterinário ao prontuário, pelo tempo que você escolher', 'Três modelos de tag Getpet', 'Perguntas frequentes', 'A tag Getpet chega em breve'] as $title) {
     check("título de seção nomeia a coisa: $title", in_array($title, $h2Text, true));
 }
-check('letras do wordmark escondidas de leitores de tela', preg_match('/<span class="wordmark"[^>]*aria-hidden="true"/', $h1[1] ?? '') === 1);
-check('mascote do logo acima do título', strpos($html, 'logo-mascot.webp') !== false && strpos($html, 'logo-mascot.webp') < strpos($html, '<h1'));
+check('logo integrada (círculo atrás do nome) é a imagem oficial da marca', str_contains($h1[1] ?? '', 'assets/img/logo-getpet.webp'));
+check('sem mascote separado do nome', !str_contains($html, 'logo-mascot.webp'));
 $tagPos = strpos($html, 'Se ele se perder, o caminho de volta está na');
 check('frase "Se ele se perder" vem depois do h1', $tagPos !== false && $tagPos > strpos($html, '</h1>'));
 
@@ -74,7 +74,7 @@ foreach ($c['models'] as $m) {
     check("botão do modelo {$m['id']} com mensagem própria", str_contains($html, e(wa_link($c['whatsapp'], $m['message']))));
 }
 check('modelo Localização com selo Mais completo', str_contains($html, 'Mais completo'));
-check('6 perguntas no FAQ', substr_count($html, 'class="faq__item"') === 6);
+check('6 perguntas no FAQ, clicáveis', substr_count($html, '<details class="faq__item"') === 6);
 check('"Em breve" nos 3 modelos', substr_count($html, 'Em breve') === 3);
 check('nenhum preço exibido', !str_contains($html, 'R$'));
 check('index sem guarda provisória', !str_contains((string) file_get_contents($root . '/index.php'), 'TEMP'));
@@ -134,10 +134,10 @@ foreach (['💬', '👆', '🚨'] as $emoji) {
 }
 
 // Dicas do usuário + Taste Skill
-check('mascote em círculo completo (311x298)', str_contains($heroHtml, 'logo-mascot.webp" alt="" width="311" height="298"'));
+check('sem adesivo "Sem app pra quem encontra" sobre o cartão', !str_contains($html, 'Sem app pra quem encontra'));
 preg_match('/<ul class="hero__checks">(.*?)<\/ul>/s', $html, $checks);
 check('4 vantagens no topo (pares)', substr_count($checks[1] ?? '', '<li') === 4);
-check('FAQ com todas as respostas abertas (sem sanfona)', !str_contains($html, '<details') && substr_count($html, 'class="faq__item"') === 6);
+check('menu leva à seção de pet perdido', str_contains($html, 'href="#pet-perdido"'));
 check('caminho dos passos estático (sem desenho na rolagem)', !str_contains($html, 'data-draw'));
 check('tipo de página declarado para o verificador', str_contains($html, 'data-type="product"') && str_contains($html, '<meta name="page-type" content="product">') && str_contains($html, '<meta name="site-kind" content="tech">'));
 

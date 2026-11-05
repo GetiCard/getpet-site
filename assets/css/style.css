@@ -214,8 +214,14 @@ main { overflow-x: clip; }
 
 @media (max-width: 899px) {
   :root { --header-h: 76px; }
-  .nav-bar { padding: 6px 6px 6px 14px; min-height: 60px; gap: 10px; }
+  /* Sem barra vazia no meio: logo e menu viram dois elementos soltos */
+  .nav-bar { padding: 0; min-height: 56px; gap: 10px; background: none; border: 0; box-shadow: none; border-radius: 0; }
+  .nav-logo {
+    background: var(--white); border: var(--border); border-radius: 999px; box-shadow: 3px 3px 0 var(--ink);
+    padding: 4px 16px; height: 52px;
+  }
   .nav-logo img { height: 40px; }
+  .nav-toggle { width: 52px; height: 52px; box-shadow: 3px 3px 0 var(--ink); }
   .nav-cta { display: none; }
   .nav-toggle { margin-left: auto; }
   .nav-toggle { display: grid; }
@@ -298,17 +304,10 @@ main { overflow-x: clip; }
 .hero { padding-block: clamp(24px, 3.5vw, 48px) clamp(64px, 9vw, 112px); overflow: hidden; }
 .hero__grid { display: grid; gap: clamp(48px, 6vw, 64px); align-items: center; }
 @media (min-width: 900px) { .hero__grid { grid-template-columns: 1.08fr 0.92fr; } }
-/* Marca primeiro: mascote + wordmark no estilo do logo */
+/* Marca primeiro: o logo oficial (círculo atrás do nome) + o que é vendido */
 .brand-lockup { display: inline-grid; justify-items: center; }
-.brand-lockup__mascot { width: clamp(132px, 12vw, 172px); height: auto; }
-.hero__title { margin-top: 10px; text-align: center; }
-.wordmark {
-  display: block; font-family: var(--font-title); font-weight: 700; letter-spacing: -0.02em; line-height: .9;
-  font-size: clamp(4rem, 2.6rem + 5vw, 6rem);
-  color: var(--white); -webkit-text-stroke: .085em var(--brand-blue); paint-order: stroke fill;
-  text-shadow: .045em .06em 0 var(--brand-navy);
-}
-.wordmark__letter { display: inline-block; }
+.hero__title { text-align: center; }
+.brand-logo { display: block; width: clamp(220px, 21vw, 300px); height: auto; margin-inline: auto; filter: drop-shadow(0 10px 16px rgba(45, 52, 54, .14)); }
 .hero__sub {
   display: block; margin-top: 12px; font-family: var(--font-title); font-weight: 600;
   font-size: clamp(1.15rem, 1rem + .7vw, 1.5rem); color: var(--ink); letter-spacing: 0;
@@ -422,18 +421,8 @@ main { overflow-x: clip; }
 .mock-profile--full .mock-profile__cover { height: 130px; }
 
 .profile-stage { position: relative; width: min(380px, 100%); }
-.sticker {
-  position: absolute; font-family: var(--font-title); font-weight: 600; font-size: .95rem;
-  border: var(--border); border-radius: 999px; padding: 8px 14px; box-shadow: var(--shadow-sm); white-space: nowrap;
-}
-.sticker--yellow { background: var(--yellow); }
-.sticker--lilac { background: var(--lilac); }
-.sticker--a { top: 24px; right: -20px; }
-.sticker--b { bottom: 40px; left: -20px; }
 @media (max-width: 599px) {
-  .sticker--a { right: -6px; top: 16px; font-size: .82rem; }
-  .sticker--b { left: -6px; font-size: .82rem; }
-}
+    }
 
 /* ---------- Como funciona ---------- */
 .steps { display: grid; gap: 40px; }
@@ -472,7 +461,7 @@ main { overflow-x: clip; }
   padding: 22px 22px 24px;
 }
 .poster__badge {
-  display: inline-block; background: var(--red-strong); color: #fff; font-family: var(--font-title); font-weight: 600;
+  display: inline-flex; align-items: center; gap: 6px; background: var(--red-strong); color: #fff; font-family: var(--font-title); font-weight: 600;
   font-size: .82rem; letter-spacing: .03em; border: 2.5px solid var(--ink); border-radius: 999px; padding: 6px 12px;
 }
 .poster__photo { width: 150px; height: 150px; margin: 16px auto 0; border: var(--border); border-radius: 24px; overflow: hidden; background: #FFE3B3; }
@@ -486,10 +475,13 @@ main { overflow-x: clip; }
 .poster__share { display: block; margin-top: 12px; background: var(--purple); color: #fff; font-family: var(--font-title); font-weight: 600; border: 2.5px solid var(--ink); border-radius: 999px; padding: 10px; box-shadow: 3px 3px 0 var(--ink); }
 
 /* ---------- Saúde: a tela do prontuário do app é o visual ---------- */
-.health-topics { display: flex; flex-wrap: wrap; gap: 10px; }
+.health-topics { display: grid; grid-template-columns: 1fr; gap: 10px; max-width: 520px; }
+@media (min-width: 420px) { .health-topics { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.health-topics li { white-space: nowrap; }
+@media (max-width: 479px) { .health-topics li { white-space: normal; font-size: .9rem; } }
 .health-topics li {
-  display: inline-flex; align-items: center; gap: 8px; font-weight: 800; font-size: .95rem;
-  background: var(--white); border: 2.5px solid var(--ink); border-radius: 999px; padding: 6px 14px 6px 10px;
+  display: flex; align-items: center; gap: 8px; font-weight: 800; font-size: .95rem; line-height: 1.25;
+  background: var(--white); border: 2.5px solid var(--ink); border-radius: 999px; padding: 7px 14px 7px 10px;
 }
 .health-topics .dot { width: 14px; height: 14px; margin-top: 0; border-width: 2.5px; }
 
@@ -609,10 +601,24 @@ main { overflow-x: clip; }
 .faq-wrap { display: grid; gap: 32px; }
 @media (min-width: 900px) { .faq-wrap { grid-template-columns: 0.8fr 1.2fr; align-items: start; } }
 .link { color: var(--green-strong); font-weight: 900; text-underline-offset: 4px; }
-.faq { display: grid; gap: 0; border-top: var(--border); }
-.faq__item { padding: 18px 2px; border-bottom: 2px solid #E3DCC8; }
-.faq__item h3 { font-size: 1.15rem; font-weight: 600; }
-.faq__item p { margin-top: 6px; color: var(--muted); }
+.faq { display: grid; gap: 14px; }
+.faq__item { background: var(--cream); border: var(--border); border-radius: 20px; box-shadow: var(--shadow-sm); }
+.faq__item summary {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px; cursor: pointer; list-style: none;
+  padding: 16px 20px; font-family: var(--font-title); font-weight: 600; font-size: 1.15rem;
+  border-radius: 18px; transition: background-color 140ms var(--m-ease);
+}
+.faq__item summary::-webkit-details-marker { display: none; }
+.faq__item summary::after {
+  content: "+"; display: grid; place-items: center; flex: none; width: 34px; height: 34px; border-radius: 50%;
+  border: 2.5px solid var(--ink); background: var(--yellow); font-size: 1.4rem; line-height: 1;
+  transition: transform 220ms var(--ease-out-expo);
+}
+.faq__item[open] summary::after { transform: rotate(45deg); }
+.faq__item summary:focus-visible { outline-offset: -4px; }
+@media (hover: hover) and (pointer: fine) { .faq__item summary:hover { background: var(--white); } }
+.faq__item p { padding: 0 20px 18px; color: var(--muted); }
+.faq__item[open] p { animation: rise-in 300ms var(--ease-out-expo); --rise: 6px; }
 
 /* ---------- CTA final ---------- */
 .final-cta__box {
@@ -704,8 +710,7 @@ html:not(.js) .tutor-panel { display: none; }
 @media (max-width: 899px) {
   .profile-stage { display: flex; flex-direction: column; }
   .tutor-panel { order: -1; margin: 0 0 22px; }
-  .profile-stage .sticker--a { display: none; }
-}
+  .profile-stage }
 .tutor-panel__title { font-family: var(--font-title); font-weight: 600; font-size: 1.05rem; }
 .tutor-panel__list { display: grid; gap: 4px; margin-top: 10px; }
 .switch {
@@ -742,17 +747,10 @@ html:not(.js) .tutor-panel { display: none; }
 .site-footer.closing { padding-top: clamp(48px, 7vw, 80px); }
 
 @media (min-width: 1024px) {
-  /* Cartão do pet: painel de interruptores ao lado do cartão */
-  #cartao .split { grid-template-columns: .82fr 1.18fr; }
-  #cartao .profile-stage { width: auto; display: grid; grid-template-columns: minmax(0, 360px) 230px; gap: 22px; align-items: start; }
-  #cartao .tutor-panel { margin-top: 0; }
-  #cartao .sticker--a { right: 240px; }
   /* Modelos mais compactos */
   .model__art { height: 136px; padding: 12px; }
   .model__name { font-size: 1.45rem; margin-top: 2px; }
   #modelos .section-head, #duvidas .section-head, #cartao .section-head { margin-bottom: 32px; }
-  .faq__item { padding-block: 11px; }
-  .faq__item p { margin-top: 2px; font-size: 1rem; line-height: 1.5; }
   #cartao .feature-list { gap: 14px; }
   .mock-profile--full .mock-profile__cover { height: 96px; }
   .mock-profile--full .mock-profile__box { margin-top: 10px; padding: 10px 12px; }
@@ -787,4 +785,6 @@ html:not(.js) .tutor-panel { display: none; }
   .mock-field { transition: opacity 150ms linear; }
   .sticky-cta { transition: opacity 150ms linear; }
   .sticky-cta.is-hidden { transform: none; }
+  .faq__item[open] p { animation: fade-in 150ms ease-out; }
+  .faq__item summary::after { transition: none; }
 }

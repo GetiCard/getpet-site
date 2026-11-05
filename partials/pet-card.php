@@ -30,7 +30,6 @@ $profileFeatures = [
     <div class="split__visual">
       <div class="profile-stage">
         <?php $profileVariant = 'full'; include __DIR__ . '/mock-profile.php'; ?>
-        <span class="sticker sticker--yellow sticker--a" aria-hidden="true">Sem app pra quem encontra</span>
 
         <div class="tutor-panel" data-tutor-panel>
           <p class="tutor-panel__title">Experimente: você decide o que aparece</p>
