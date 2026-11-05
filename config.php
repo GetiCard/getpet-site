@@ -15,7 +15,7 @@ return [
     'support_email' => 'suporte@getcard.digital',
 
     // URL pública desta landing (usada no og:url). Vazio = omitir.
-    'site_url' => '',
+    'site_url' => 'https://geticard.github.io/getpet-site',
 
     'models' => [
         [

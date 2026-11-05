@@ -105,9 +105,12 @@ restore_error_handler();
 check('modelo sem chave badge não gera aviso', $ok);
 
 $_SERVER['HTTP_HOST'] = 'getpet.test:8000';
-$hostHtml = render_with($c);
+$noSite = $c;
+$noSite['site_url'] = '';
+$hostHtml = render_with($noSite);
 unset($_SERVER['HTTP_HOST']);
 check('og:image absoluto quando site_url está vazio', str_contains($hostHtml, 'content="http://getpet.test:8000/assets/img/og-image.jpg"'));
+check('og:image usa site_url quando definido', str_contains($html, 'content="' . rtrim($c['site_url'], '/') . '/assets/img/og-image.jpg"'));
 
 foreach ($c['models'] as $m) {
     check("botão Quero este com nome do modelo {$m['id']} para leitor de tela", str_contains($html, 'Quero este<span class="sr-only"> ' . e($m['name']) . '</span>'));
