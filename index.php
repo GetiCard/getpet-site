@@ -27,10 +27,7 @@ $sections = [
 <?php include __DIR__ . '/partials/header.php'; ?>
 <main id="conteudo">
 <?php foreach ($sections as $section) {
-    $file = __DIR__ . '/partials/' . $section . '.php';
-    if (is_file($file)) { // TEMP: removido na Task 5, quando todas as seções existirem
-        include $file;
-    }
+    include __DIR__ . '/partials/' . $section . '.php';
 } ?>
 </main>
 <?php include __DIR__ . '/partials/footer.php'; ?>

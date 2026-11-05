@@ -47,5 +47,18 @@ foreach (['como-funciona', 'cartao'] as $id) {
 check('cartaz PROCURA-SE', str_contains($html, 'PROCURA-SE'));
 check('sem âncoras provisórias', !str_contains($html, '<span id="'));
 
+// Task 5 — saúde, vet, modelos, dúvidas, CTA final
+foreach (['saude', 'veterinario', 'modelos', 'duvidas', 'cta-final'] as $id) {
+    check("seção #$id existe", preg_match('/<section[^>]*id="' . $id . '"/', $html) === 1);
+}
+foreach ($c['models'] as $m) {
+    check("botão do modelo {$m['id']} com mensagem própria", str_contains($html, e(wa_link($c['whatsapp'], $m['message']))));
+}
+check('modelo Localização com selo Mais completo', str_contains($html, 'Mais completo'));
+check('6 perguntas no FAQ', substr_count($html, '<details') === 6);
+check('"Em breve" nos 3 modelos', substr_count($html, 'Em breve') === 3);
+check('nenhum preço exibido', !str_contains($html, 'R$'));
+check('index sem guarda provisória', !str_contains((string) file_get_contents($root . '/index.php'), 'TEMP'));
+
 echo $failures === 0 ? "\nOK\n" : "\n$failures falha(s)\n";
 exit($failures === 0 ? 0 : 1);
