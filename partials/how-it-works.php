@@ -27,6 +27,10 @@ $steps = [
       <h2 id="como-funciona-title">Três passos entre o susto e o <span class="mark">reencontro</span></h2>
     </div>
 
+    <div class="steps-wrap" data-draw>
+    <svg class="steps__path" viewBox="0 0 1000 90" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+      <path d="M273 44 C 380 -14, 520 -6, 615 72 C 700 0, 860 -14, 957 44" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="1 12" vector-effect="non-scaling-stroke"/>
+    </svg>
     <ol class="steps">
       <?php foreach ($steps as $i => $step): ?>
         <li class="card step reveal" data-delay="<?= $i + 1 ?>">
@@ -39,5 +43,6 @@ $steps = [
         </li>
       <?php endforeach; ?>
     </ol>
+    </div>
   </div>
 </section>

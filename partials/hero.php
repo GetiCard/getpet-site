@@ -1,12 +1,18 @@
+<?php $brandLetters = preg_split('//u', 'Getpet', -1, PREG_SPLIT_NO_EMPTY); ?>
 <section class="hero" aria-labelledby="hero-title">
   <div class="container hero__grid">
     <div class="hero__copy">
-      <span class="pill pill--yellow">
-        <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" d="M8 8a6 6 0 0 0 0 8M5 5a10 10 0 0 0 0 14M16 8a6 6 0 0 1 0 8M19 5a10 10 0 0 1 0 14"/></svg>
-        Identidade digital para pets
-      </span>
-      <h1 id="hero-title" class="hero__title">Se ele se perder, o caminho de volta está na <span class="mark mark--green">coleira.</span></h1>
-      <p class="hero__lead lead">A tag Getpet tem <strong>NFC e QR Code</strong>. Quem encontrar seu pet aproxima o celular e, na hora, vê o cartão dele com o jeito certo de falar com você.</p>
+      <div class="brand-lockup">
+        <img class="brand-lockup__mascot" src="assets/img/logo-mascot.webp" alt="" width="477" height="318">
+        <h1 id="hero-title" class="hero__title">
+          <span class="wordmark" aria-hidden="true"><?php foreach ($brandLetters as $i => $letter): ?><span class="wordmark__letter" style="--i:<?= $i ?>"><?= e($letter) ?></span><?php endforeach; ?></span>
+          <span class="sr-only">Getpet:</span>
+          <span class="hero__sub">A identidade digital do seu pet</span>
+        </h1>
+      </div>
+
+      <p class="hero__tagline">Se ele se perder, o caminho de volta está na <span class="mark mark--green">coleira.</span></p>
+      <p class="hero__lead lead">Uma tag com <strong>NFC e QR Code</strong>: quem encontrar seu pet aproxima o celular e vê, na hora, como falar com você.</p>
 
       <div class="hero__actions">
         <a class="btn btn--primary" href="<?= e($wa) ?>"<?= link_attrs($wa) ?>>
@@ -17,9 +23,9 @@
       </div>
 
       <ul class="hero__checks">
-        <li>Quem encontra não precisa de app</li>
-        <li>Funciona com a câmera de qualquer celular</li>
-        <li>Você decide o que aparece no cartão</li>
+        <li>Sem app para quem encontra</li>
+        <li>Funciona em qualquer celular</li>
+        <li>Você decide o que aparece</li>
       </ul>
     </div>
 

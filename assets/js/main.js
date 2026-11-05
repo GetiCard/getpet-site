@@ -37,7 +37,7 @@
   }
 
   /* ---------- Revelação ao rolar ---------- */
-  var revealItems = document.querySelectorAll('.reveal');
+  var revealItems = document.querySelectorAll('.reveal, [data-draw]');
   if ('IntersectionObserver' in window) {
     var revealObserver = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
@@ -66,5 +66,33 @@
       sticky.classList.toggle('is-hidden', visibleCtas.size > 0);
     }, { threshold: 0.2 });
     [heroActions, finalCta].forEach(function (el) { if (el) ctaObserver.observe(el); });
+  }
+
+  /* ---------- Header compacto depois de rolar ---------- */
+  var header = document.querySelector('.site-header');
+  if (header) {
+    var ticking = false;
+    var updateHeader = function () {
+      header.classList.toggle('is-scrolled', window.scrollY > 24);
+      ticking = false;
+    };
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; window.requestAnimationFrame(updateHeader); }
+    }, { passive: true });
+    updateHeader();
+  }
+
+  /* ---------- Cartão do pet: interruptores mostram/escondem campos do mockup ---------- */
+  var panel = document.querySelector('[data-tutor-panel]');
+  if (panel) {
+    var stage = panel.closest('.profile-stage');
+    panel.addEventListener('click', function (event) {
+      var button = event.target.closest('[data-toggle]');
+      if (!button) return;
+      var on = button.getAttribute('aria-checked') !== 'true';
+      button.setAttribute('aria-checked', on ? 'true' : 'false');
+      var field = stage && stage.querySelector('[data-field="' + button.getAttribute('data-toggle') + '"]');
+      if (field) field.classList.toggle('is-off', !on);
+    });
   }
 })();

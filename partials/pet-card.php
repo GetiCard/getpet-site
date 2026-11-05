@@ -32,7 +32,25 @@ $profileFeatures = [
       <div class="profile-stage">
         <?php $profileVariant = 'full'; include __DIR__ . '/mock-profile.php'; ?>
         <span class="sticker sticker--yellow sticker--a" aria-hidden="true">Sem app pra quem encontra</span>
-        <span class="sticker sticker--lilac sticker--b" aria-hidden="true">Atualize quando quiser</span>
+
+        <div class="tutor-panel" data-tutor-panel>
+          <p class="tutor-panel__title"><span aria-hidden="true">👆</span> Experimente: você decide o que aparece</p>
+          <ul class="tutor-panel__list">
+            <?php foreach ([
+                'call' => 'Botão “Falar com o Tutor”',
+                'attrs' => 'Sexo, peso e porte',
+                'about' => 'Sobre mim',
+                'likes' => 'Gostos & hábitos',
+            ] as $field => $label): ?>
+              <li>
+                <button class="switch" type="button" role="switch" aria-checked="true" data-toggle="<?= e($field) ?>">
+                  <span class="switch__track" aria-hidden="true"><span class="switch__thumb"></span></span>
+                  <span class="switch__label"><?= e($label) ?></span>
+                </button>
+              </li>
+            <?php endforeach; ?>
+          </ul>
+        </div>
       </div>
     </div>
   </div>

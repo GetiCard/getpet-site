@@ -38,9 +38,22 @@ foreach (['como-funciona', 'cartao', 'saude', 'modelos', 'duvidas'] as $id) {
 }
 
 // Task 4 — hero, como funciona, cartão, pet perdido
+// Topo com a marca primeiro: h1 = Getpet + o que é; a frase emocional vem depois
 preg_match('/<h1[^>]*>(.*?)<\/h1>/s', $html, $h1);
-$h1Text = trim(preg_replace('/\s+/', ' ', strip_tags($h1[1] ?? '')));
-check('h1 do hero', $h1Text === 'Se ele se perder, o caminho de volta está na coleira.');
+preg_match('/<span class="sr-only">([^<]*)<\/span>/', $h1[1] ?? '', $srName);
+check('h1 traz o nome Getpet para leitores de tela', trim($srName[1] ?? '') === 'Getpet:');
+check('h1 diz o que é o Getpet', str_contains($h1[1] ?? '', 'A identidade digital do seu pet'));
+check('letras do wordmark escondidas de leitores de tela', preg_match('/<span class="wordmark"[^>]*aria-hidden="true"/', $h1[1] ?? '') === 1);
+check('mascote do logo acima do título', strpos($html, 'logo-mascot.webp') !== false && strpos($html, 'logo-mascot.webp') < strpos($html, '<h1'));
+$tagPos = strpos($html, 'Se ele se perder, o caminho de volta está na');
+check('frase "Se ele se perder" vem depois do h1', $tagPos !== false && $tagPos > strpos($html, '</h1>'));
+
+// Cartão do pet: o visitante liga/desliga o que aparece
+preg_match_all('/<button[^>]*role="switch"[^>]*aria-checked="true"[^>]*data-toggle="([a-z]+)"/', $html, $switches);
+check('4 interruptores no cartão do pet', count($switches[1]) === 4);
+foreach ($switches[1] as $field) {
+    check("interruptor $field controla um campo do mockup", str_contains($html, 'data-field="' . $field . '"'));
+}
 foreach (['como-funciona', 'cartao'] as $id) {
     check("seção #$id existe", preg_match('/<section[^>]*id="' . $id . '"/', $html) === 1);
 }
