@@ -37,5 +37,15 @@ foreach (['como-funciona', 'cartao', 'saude', 'modelos', 'duvidas'] as $id) {
     check("menu aponta para #$id", str_contains($html, 'href="#' . $id . '"'));
 }
 
+// Task 4 — hero, como funciona, cartão, pet perdido
+preg_match('/<h1[^>]*>(.*?)<\/h1>/s', $html, $h1);
+$h1Text = trim(preg_replace('/\s+/', ' ', strip_tags($h1[1] ?? '')));
+check('h1 do hero', $h1Text === 'Se ele se perder, o caminho de volta está na coleira.');
+foreach (['como-funciona', 'cartao'] as $id) {
+    check("seção #$id existe", preg_match('/<section[^>]*id="' . $id . '"/', $html) === 1);
+}
+check('cartaz PROCURA-SE', str_contains($html, 'PROCURA-SE'));
+check('sem âncoras provisórias', !str_contains($html, '<span id="'));
+
 echo $failures === 0 ? "\nOK\n" : "\n$failures falha(s)\n";
 exit($failures === 0 ? 0 : 1);
