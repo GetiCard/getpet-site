@@ -1,6 +1,6 @@
 <section class="section final-cta" id="cta-final" aria-labelledby="cta-final-title">
   <div class="container">
-    <div class="final-cta__box reveal">
+    <div class="final-cta__box">
       <img class="final-cta__logo" src="assets/img/logo-getpet.webp" alt="" width="480" height="454" loading="lazy">
       <div class="final-cta__copy">
         <h2 id="cta-final-title">Dê ao seu pet um caminho de volta para casa</h2>

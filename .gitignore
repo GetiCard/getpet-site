@@ -2,3 +2,8 @@
 .DS_Store
 Thumbs.db
 .claude/launch.json
+
+# Skills de design usadas localmente (não fazem parte do site)
+Animate Skill/
+Impeccable Skill/
+.taste-skill/

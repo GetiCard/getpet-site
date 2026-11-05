@@ -32,20 +32,33 @@
     <div class="hero__visual">
       <div class="hero__blob" aria-hidden="true"></div>
 
+      <!-- Momento focal: a tag encosta no celular e o cartão do pet abre -->
       <div class="phone">
         <div class="phone__notch" aria-hidden="true"></div>
         <div class="phone__screen">
-          <?php $profileVariant = 'compact'; include __DIR__ . '/mock-profile.php'; ?>
+          <div class="phone__lock" aria-hidden="true">
+            <span class="phone__time">9:41</span>
+            <span class="phone__date">sábado, 14 de junho</span>
+            <span class="phone__nfc">
+              <svg viewBox="0 0 24 24" width="30" height="30"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" d="M8 8a6 6 0 0 0 0 8M5 5a10 10 0 0 0 0 14M16 8a6 6 0 0 1 0 8M19 5a10 10 0 0 1 0 14"/><circle cx="12" cy="12" r="1.8" fill="currentColor"/></svg>
+              Aproxime a tag
+            </span>
+          </div>
+          <div class="phone__card">
+            <?php $profileVariant = 'compact'; include __DIR__ . '/mock-profile.php'; ?>
+          </div>
         </div>
       </div>
 
       <div class="hero__tag">
         <span class="nfc-waves" aria-hidden="true"><i></i><i></i><i></i></span>
-        <?php $tagVariant = 'round'; include __DIR__ . '/art-tag.php'; ?>
+        <img src="assets/img/tags/tag-hero.webp" alt="Tag Getpet redonda com NFC e QR Code" width="339" height="344">
       </div>
 
       <div class="hero__toast" aria-hidden="true">
-        <span class="hero__toast-icon">💬</span>
+        <span class="hero__toast-icon">
+          <svg viewBox="0 0 24 24" width="18" height="18"><path d="M4 5h16v11H9l-5 4V5Z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/></svg>
+        </span>
         <span><b>Encontrei o Paçoca!</b><small>Ele está bem, na praça do bairro.</small></span>
       </div>
     </div>

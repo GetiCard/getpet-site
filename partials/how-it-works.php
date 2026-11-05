@@ -22,8 +22,7 @@ $steps = [
 ?>
 <section class="section" id="como-funciona" aria-labelledby="como-funciona-title">
   <div class="container">
-    <div class="section-head section-head--center reveal">
-      <span class="pill pill--orange">Como funciona</span>
+    <div class="section-head section-head--center">
       <h2 id="como-funciona-title">Três passos entre o susto e o <span class="mark">reencontro</span></h2>
     </div>
 
@@ -33,7 +32,7 @@ $steps = [
     </svg>
     <ol class="steps">
       <?php foreach ($steps as $i => $step): ?>
-        <li class="card step reveal" data-delay="<?= $i + 1 ?>">
+        <li class="card step">
           <span class="step__number"><?= $i + 1 ?></span>
           <span class="icon-badge icon-badge--<?= e($step['color']) ?>">
             <svg viewBox="0 0 24 24" aria-hidden="true"><?= $step['icon'] ?></svg>

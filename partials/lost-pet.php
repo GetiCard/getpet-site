@@ -2,12 +2,11 @@
 <section class="section section--red" id="pet-perdido" aria-labelledby="pet-perdido-title">
   <div class="container split split--reverse">
     <div class="split__copy">
-      <div class="section-head reveal">
-        <span class="pill pill--yellow">Pet perdido</span>
+      <div class="section-head">
         <h2 id="pet-perdido-title">Se o pior acontecer, o cartaz já está pronto</h2>
         <p class="lead">Em um toque o Getpet monta um cartaz de busca com a foto, o QR Code e o seu telefone. É só postar.</p>
       </div>
-      <ul class="check-list reveal">
+      <ul class="check-list">
         <li>Gerado na hora, a partir do perfil do pet</li>
         <li>QR Code no cartaz leva direto ao cartão do pet</li>
         <li>No formato certo para stories e grupos</li>
@@ -15,9 +14,9 @@
       </ul>
     </div>
 
-    <div class="split__visual reveal">
+    <div class="split__visual">
       <div class="poster" aria-hidden="true">
-        <span class="poster__badge">🚨 PROCURA-SE / PET PERDIDO</span>
+        <span class="poster__badge"><svg viewBox="0 0 24 24" width="14" height="14"><path d="M12 3 2.5 20h19L12 3Z" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/><path d="M12 10v4m0 3v.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg> PROCURA-SE / PET PERDIDO</span>
         <div class="poster__photo"><?php include __DIR__ . '/art-pacoca.php'; ?></div>
         <p class="poster__name">Paçoca</p>
         <p class="poster__meta">Vira-lata caramelo • 3 anos</p>

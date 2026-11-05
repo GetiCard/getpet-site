@@ -9,15 +9,14 @@ $profileFeatures = [
 <section class="section section--band" id="cartao" aria-labelledby="cartao-title">
   <div class="container split">
     <div class="split__copy">
-      <div class="section-head reveal">
-        <span class="pill pill--orange">GetPet Identificação</span>
+      <div class="section-head">
         <h2 id="cartao-title">Um cartão que fala <span class="mark">pelo seu pet</span></h2>
         <p class="lead">Quando alguém lê a tag, abre o perfil público dele: quem ele é, como cuidar dele por alguns minutos e como encontrar você.</p>
       </div>
 
       <ul class="feature-list">
         <?php foreach ($profileFeatures as $i => $feature): ?>
-          <li class="feature-list__item reveal" data-delay="<?= min($i, 3) ?>">
+          <li class="feature-list__item">
             <span class="dot dot--<?= e($feature['color']) ?>" aria-hidden="true"></span>
             <div>
               <h3><?= e($feature['title']) ?></h3>
@@ -28,13 +27,13 @@ $profileFeatures = [
       </ul>
     </div>
 
-    <div class="split__visual reveal">
+    <div class="split__visual">
       <div class="profile-stage">
         <?php $profileVariant = 'full'; include __DIR__ . '/mock-profile.php'; ?>
         <span class="sticker sticker--yellow sticker--a" aria-hidden="true">Sem app pra quem encontra</span>
 
         <div class="tutor-panel" data-tutor-panel>
-          <p class="tutor-panel__title"><span aria-hidden="true">👆</span> Experimente: você decide o que aparece</p>
+          <p class="tutor-panel__title">Experimente: você decide o que aparece</p>
           <ul class="tutor-panel__list">
             <?php foreach ([
                 'call' => 'Botão “Falar com o Tutor”',

@@ -36,8 +36,8 @@
     });
   }
 
-  /* ---------- Revelação ao rolar ---------- */
-  var revealItems = document.querySelectorAll('.reveal, [data-draw]');
+  /* ---------- Caminho dos passos: desenha quando entra na tela ---------- */
+  var revealItems = document.querySelectorAll('[data-draw]');
   if ('IntersectionObserver' in window) {
     var revealObserver = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
@@ -66,6 +66,14 @@
       sticky.classList.toggle('is-hidden', visibleCtas.size > 0);
     }, { threshold: 0.2 });
     [heroActions, finalCta].forEach(function (el) { if (el) ctaObserver.observe(el); });
+  }
+
+  /* ---------- Pulso NFC do hero pausa fora da tela (loop não essencial) ---------- */
+  var hero = document.querySelector('.hero');
+  if (hero && 'IntersectionObserver' in window) {
+    new IntersectionObserver(function (entries) {
+      hero.classList.toggle('is-offscreen', !entries[0].isIntersecting);
+    }).observe(hero);
   }
 
   /* ---------- Header compacto depois de rolar ---------- */

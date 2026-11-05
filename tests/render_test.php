@@ -113,5 +113,19 @@ $at['instagram'] = '@geticompany';
 $atHtml = render_with($at);
 check('instagram com @ não duplica', !str_contains($atHtml, '@@') && str_contains($atHtml, 'instagram.com/geticompany"'));
 
+// Revisão com Impeccable + Animate + taste skill
+check('sem rótulo (pill) acima dos títulos', substr_count($html, 'class="pill') === 0);
+check('sem reveal genérico de rolagem', preg_match('/class="[^"]*\breveal\b/', $html) === 0);
+$heroHtml = substr($html, strpos($html, '<section class="hero"'), strpos($html, '</section>', strpos($html, '<section class="hero"')) - strpos($html, '<section class="hero"'));
+check('hero usa a foto real da tag', str_contains($heroHtml, 'assets/img/tags/tag-hero.webp'));
+check('hero começa com o celular bloqueado pedindo a tag', str_contains($heroHtml, 'phone__lock') && str_contains($heroHtml, 'Aproxime a tag'));
+foreach (['basic', 'nfc', 'location'] as $id) {
+    check("modelo $id com foto real da tag", str_contains($html, 'assets/img/tags/tag-' . $id . '.webp'));
+}
+check('Saúde mostrada como tela do app', str_contains($html, 'class="health-app') && !str_contains($html, 'health-grid'));
+foreach (['💬', '👆', '🚨'] as $emoji) {
+    check("sem emoji $emoji no lugar de ícone", !str_contains($html, $emoji));
+}
+
 echo $failures === 0 ? "\nOK\n" : "\n$failures falha(s)\n";
 exit($failures === 0 ? 0 : 1);

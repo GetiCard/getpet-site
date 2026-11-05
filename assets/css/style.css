@@ -39,11 +39,10 @@
   --ease-out-quint: cubic-bezier(.23, 1, .32, 1);
   --ease-out-cubic: cubic-bezier(.33, 1, .68, 1);
   --ease-in-out-cubic: cubic-bezier(.645, .045, .355, 1);
-  --ease-spring: cubic-bezier(.34, 1.56, .64, 1);
+  --ease-out-expo: cubic-bezier(.16, 1, .3, 1);
   --dur-hover: 150ms;
   --dur-enter: 300ms;
   --dur-exit: 220ms;
-  --dur-reveal: 480ms;
 
   --brand-blue: #2F55B8;
   --brand-navy: #1B2A66;
@@ -76,6 +75,12 @@ h1, h2, h3, h4 { font-family: var(--font-title); font-weight: 700; line-height: 
 button { font: inherit; color: inherit; }
 
 :focus-visible { outline: 3px solid var(--purple); outline-offset: 3px; border-radius: 8px; }
+
+/* Superfícies do navegador com a paleta (Impeccable: browser surfaces) */
+::selection { background: var(--yellow); color: var(--ink); }
+html { accent-color: var(--green-strong); caret-color: var(--green-strong); scrollbar-color: var(--ink) var(--cream-deep); }
+a { text-underline-offset: 4px; text-decoration-thickness: 2px; }
+h1, h2, h3 { text-wrap: balance; }
 /* Em fundos escuros/verdes o roxo some: usa amarelo (> 3:1) */
 .final-cta :focus-visible,
 .site-footer :focus-visible,
@@ -102,7 +107,7 @@ main { overflow-x: clip; }
 
 .section-head { max-width: 720px; margin-bottom: clamp(32px, 5vw, 56px); }
 .section-head--center { margin-inline: auto; text-align: center; }
-.section-head h2 { font-size: clamp(2rem, 1.3rem + 3vw, 3.25rem); margin-top: 16px; }
+.section-head h2 { font-size: clamp(2rem, 1.3rem + 3vw, 3.25rem); text-wrap: balance; }
 .section-head .lead { margin-top: 16px; }
 
 .lead { font-size: clamp(1.0625rem, 1rem + 0.4vw, 1.25rem); color: var(--muted); font-weight: 700; }
@@ -125,20 +130,6 @@ main { overflow-x: clip; }
 .mark--red::after { background: #F7B6BC; }
 
 /* ---------- Componentes ---------- */
-.pill {
-  display: inline-flex; align-items: center; gap: 8px;
-  font-family: var(--font-title); font-weight: 600; font-size: 0.8125rem;
-  text-transform: uppercase; letter-spacing: 0.06em;
-  padding: 6px 14px; border: 2.5px solid var(--ink); border-radius: 999px;
-  background: var(--white); color: var(--ink); box-shadow: 2px 2px 0 var(--ink);
-}
-.pill--orange { background: var(--orange); }
-.pill--yellow { background: var(--yellow); }
-.pill--cyan { background: var(--cyan); }
-.pill--green { background: #8FE3C9; }
-.pill--purple { background: var(--purple); color: var(--white); }
-.pill--red { background: var(--red-strong); color: var(--white); }
-.pill--lilac { background: var(--lilac); }
 
 .card {
   background: var(--white); border: var(--border); border-radius: var(--radius);
@@ -156,9 +147,8 @@ main { overflow-x: clip; }
 @media (hover: hover) {
   .btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--ink); }
 }
-.btn:active { transform: translate(3px, 3px) scale(.98); box-shadow: 1px 1px 0 var(--ink); transition-duration: 100ms; }
-.btn .icon { transition: transform 300ms var(--ease-spring); }
-@media (hover: hover) { .btn:hover .icon { transform: rotate(-12deg) scale(1.1); } }
+.btn:active { transform: translate(3px, 3px) scale(.97); box-shadow: 1px 1px 0 var(--ink); transition-duration: 120ms; }
+.btn .icon { transition: transform 300ms var(--ease-out-expo); }
 .btn--primary { background: var(--green-strong); color: var(--white); }
 .btn--primary:hover { background: #096A51; }
 .btn--ghost { background: var(--white); }
@@ -250,16 +240,6 @@ main { overflow-x: clip; }
   .nav-cta { font-size: 0.92rem; padding: 9px 14px; }
 }
 
-/* ---------- Revelação ao rolar ---------- */
-/* Entrada por animation (fill backwards) para deixar transition livre para os hovers */
-.js .reveal:not(.is-visible) { opacity: 0; }
-.js .reveal.is-visible { animation: reveal-in var(--dur-reveal) var(--ease-out-quint) var(--reveal-delay, 0ms) backwards; }
-.js .reveal[data-delay="1"] { --reveal-delay: 60ms; }
-.js .reveal[data-delay="2"] { --reveal-delay: 120ms; }
-.js .reveal[data-delay="3"] { --reveal-delay: 180ms; }
-.js .reveal[data-delay="4"] { --reveal-delay: 240ms; }
-@keyframes reveal-in { from { opacity: 0; transform: translateY(24px); } }
-
 /* ---------- Footer ---------- */
 .site-footer {
   background: var(--ink); color: var(--cream);
@@ -319,11 +299,10 @@ main { overflow-x: clip; }
 /* Marca primeiro: mascote + wordmark no estilo do logo */
 .brand-lockup { display: inline-grid; justify-items: center; }
 .brand-lockup__mascot { width: clamp(140px, 13vw, 180px); height: auto; position: relative; z-index: 0; }
-@media (hover: hover) { .brand-lockup__mascot:hover { animation: wiggle 600ms var(--ease-in-out-cubic); } }
 .hero__title { margin-top: -0.12em; position: relative; z-index: 1; text-align: center; }
 .wordmark {
   display: block; font-family: var(--font-title); font-weight: 700; letter-spacing: -0.02em; line-height: .9;
-  font-size: clamp(4.2rem, 2.4rem + 7vw, 7.4rem);
+  font-size: clamp(4rem, 2.6rem + 5vw, 6rem);
   color: var(--white); -webkit-text-stroke: .085em var(--brand-blue); paint-order: stroke fill;
   text-shadow: .045em .06em 0 var(--brand-navy);
 }
@@ -364,66 +343,49 @@ main { overflow-x: clip; }
   box-shadow: 10px 10px 0 rgba(45, 52, 54, .25); transform: rotate(3deg);
 }
 .phone__notch { position: absolute; top: 18px; left: 50%; width: 84px; height: 22px; margin-left: -42px; border-radius: 20px; background: var(--ink); z-index: 2; }
-.phone__screen { height: 100%; border-radius: 34px; overflow: hidden; background: var(--cream); }
+.phone__screen { position: relative; height: 100%; border-radius: 34px; overflow: hidden; background: var(--cream); }
+.phone__card { height: 100%; }
 
-/* Tag sobre o celular */
-.hero__tag { position: absolute; left: 0; bottom: 6%; width: 150px; transform: rotate(-10deg); }
-.nfc-waves { position: absolute; right: -34px; top: -28px; width: 70px; height: 70px; }
+/* Tela bloqueada: só existe com JS, para a coreografia; sem JS o cartão já aparece */
+.phone__lock { display: none; }
+.js .phone__lock {
+  position: absolute; inset: 0; z-index: 1; display: flex; flex-direction: column; align-items: center;
+  padding-top: 64px; color: var(--cream);
+  background: radial-gradient(120% 80% at 50% 0%, #46525a 0%, var(--ink) 70%);
+}
+.phone__time { font-family: var(--font-title); font-weight: 600; font-size: 64px; line-height: 1; letter-spacing: -0.02em; }
+.phone__date { margin-top: 6px; font-weight: 800; font-size: 14px; color: #D9D2BE; }
+.phone__nfc {
+  margin-top: auto; margin-bottom: 64px; display: grid; justify-items: center; gap: 10px;
+  font-family: var(--font-title); font-weight: 600; font-size: 16px;
+}
+.phone__nfc svg { width: 54px; height: 54px; padding: 12px; border-radius: 50%; border: 2.5px solid currentColor; }
+
+/* A tag real (foto do portfólio) pendurada ao lado do celular */
+.hero__tag { position: absolute; left: 2%; bottom: 8%; width: 168px; z-index: 2; transform: rotate(-10deg); transform-origin: 50% 4%; }
+.hero__tag img { width: 100%; height: auto; filter: drop-shadow(0 16px 18px rgba(45, 52, 54, .28)); }
+.nfc-waves { position: absolute; right: -40px; top: 18%; width: 72px; height: 72px; pointer-events: none; }
 .nfc-waves i {
   position: absolute; inset: 0; border: 4px solid var(--ink); border-color: var(--ink) var(--ink) transparent transparent;
-  border-radius: 50%; opacity: 0; animation: nfc 2.2s ease-out infinite;
-}
-.nfc-waves i:nth-child(2) { animation-delay: .5s; }
-.nfc-waves i:nth-child(3) { animation-delay: 1s; }
-@keyframes nfc {
-  0% { transform: scale(.35); opacity: 0; }
-  30% { opacity: 1; }
-  100% { transform: scale(1.15); opacity: 0; }
+  border-radius: 50%; opacity: 0;
 }
 
 .hero__toast {
-  position: absolute; right: 0; top: 10%; max-width: 230px;
+  position: absolute; right: 0; top: 10%; max-width: 236px; z-index: 3;
   display: flex; gap: 10px; align-items: center;
   background: var(--white); border: var(--border); border-radius: 18px; box-shadow: var(--shadow-sm);
   padding: 10px 14px; font-size: .9rem; line-height: 1.3; transform: rotate(4deg);
-  animation: floaty 5s ease-in-out infinite;
 }
 .hero__toast b { display: block; font-family: var(--font-title); font-weight: 600; }
 .hero__toast small { color: var(--muted); font-size: .8rem; }
 .hero__toast-icon { display: grid; place-items: center; width: 36px; height: 36px; flex: none; border-radius: 50%; background: #8FE3C9; border: 2.5px solid var(--ink); }
-@keyframes floaty { 50% { transform: rotate(4deg) translateY(-8px); } }
 
 @media (max-width: 599px) {
-  .hero__visual { min-height: 460px; }
-  .hero__tag { width: 118px; left: -4px; }
+  .hero__visual { min-height: 480px; }
+  .hero__tag { width: 128px; left: -6px; }
   .hero__toast { right: -4px; max-width: 200px; }
+  .nfc-waves { right: -30px; width: 56px; height: 56px; }
 }
-
-/* ---------- Tags (ilustração) ---------- */
-.tag { position: relative; width: 100%; aspect-ratio: 1; container-type: inline-size; }
-.tag__hole {
-  position: absolute; top: -9%; left: 50%; width: 22%; aspect-ratio: 1; margin-left: -11%;
-  border: 5px solid #9AA3A8; border-radius: 50%; z-index: 0;
-}
-.tag__face {
-  position: absolute; inset: 0; z-index: 1; display: grid; place-items: center; align-content: center; gap: 2%;
-  border-radius: 50%; border: 4px solid var(--ink);
-  background: radial-gradient(circle at 35% 30%, #E9F7FF 0 30%, #BFE6FA 75%);
-  box-shadow: inset 0 0 0 7px #fff, inset 0 0 0 10px var(--ink), 5px 5px 0 var(--ink);
-}
-.tag__face .tag__logo { width: 62%; }
-.tag__label { display: inline-flex; align-items: center; gap: 3px; font-family: var(--font-title); font-weight: 600; font-size: clamp(.5rem, 7cqi, .85rem); color: #1D6FA3; }
-.tag--dark .tag__face {
-  background: radial-gradient(circle at 35% 30%, #4A5257 0 25%, #1E2427 80%);
-  box-shadow: inset 0 0 0 7px #3B4347, inset 0 0 0 10px #111, 5px 5px 0 var(--ink);
-}
-.tag--dark .tag__label { color: #9FE8FF; }
-.tag--bone { aspect-ratio: 220 / 120; }
-.tag--bone .tag__hole { top: 50%; left: -8%; width: 14%; margin: -7% 0 0; }
-.tag__bone { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; filter: drop-shadow(5px 5px 0 var(--ink)); }
-.tag--bone .tag__logo { position: absolute; z-index: 2; left: 18%; top: 22%; width: 30%; }
-.tag--bone .tag__qr { position: absolute; z-index: 2; right: 18%; top: 24%; width: 26%; background: #fff; border: 2px solid var(--ink); border-radius: 6px; padding: 2%; }
-.art-qr { width: 100%; height: auto; color: var(--ink); }
 
 /* ---------- Mockup do perfil ---------- */
 .mock-profile { position: relative; background: var(--cream); text-align: center; padding-bottom: 18px; font-size: 14px; line-height: 1.4; }
@@ -481,7 +443,7 @@ main { overflow-x: clip; }
   font-family: var(--font-title); font-weight: 700; font-size: 1.5rem;
 }
 @media (min-width: 900px) {
-  /* deslocamento por top (não transform) para não conflitar com a animação .reveal */
+  /* o passo 2 desce um pouco para o caminho pontilhado formar uma onda */
   .step:nth-child(2) { top: 28px; }
 }
 
@@ -521,27 +483,60 @@ main { overflow-x: clip; }
 .poster__phone small { display: block; font-family: var(--font-body); font-weight: 900; font-size: .72rem; color: var(--green-strong); }
 .poster__share { display: block; margin-top: 12px; background: var(--purple); color: #fff; font-family: var(--font-title); font-weight: 600; border: 2.5px solid var(--ink); border-radius: 999px; padding: 10px; box-shadow: 3px 3px 0 var(--ink); }
 
-/* ---------- Saúde ---------- */
-.health-grid { display: grid; gap: 22px; }
-@media (min-width: 600px) { .health-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 1000px) { .health-grid { grid-template-columns: repeat(3, 1fr); } }
-.health-card { display: flex; gap: 16px; align-items: flex-start; }
-.health-card h3 { font-size: 1.25rem; }
-.health-card p { color: var(--muted); margin-top: 4px; }
-.health-card--timeline { grid-column: 1 / -1; flex-direction: column; gap: 24px; background: var(--ink); color: var(--cream); }
-.health-card--timeline p { color: #D9D2BE; }
-.health-card__intro { display: flex; gap: 16px; align-items: flex-start; }
-.timeline { display: grid; gap: 14px; margin: 0; padding: 0; list-style: none; position: relative; }
+/* ---------- Saúde: a tela do prontuário do app é o visual ---------- */
+.health-topics { display: flex; flex-wrap: wrap; gap: 10px; }
+.health-topics li {
+  display: inline-flex; align-items: center; gap: 8px; font-weight: 800; font-size: .95rem;
+  background: var(--white); border: 2.5px solid var(--ink); border-radius: 999px; padding: 6px 14px 6px 10px;
+}
+.health-topics .dot { width: 14px; height: 14px; margin-top: 0; border-width: 2.5px; }
+
+.health-timeline {
+  margin-top: 28px; background: var(--ink); color: var(--cream); border: var(--border); border-radius: var(--radius);
+  box-shadow: var(--shadow); padding: 22px;
+}
+.health-timeline h3 { font-size: 1.3rem; }
+.health-timeline > p { color: #D9D2BE; margin-top: 4px; font-size: .98rem; }
+.timeline { display: grid; gap: 10px; margin: 16px 0 0; padding: 0; list-style: none; }
+@media (min-width: 600px) { .timeline { grid-template-columns: repeat(2, 1fr); } }
 .timeline__item {
   display: grid; grid-template-columns: auto auto 1fr; gap: 10px; align-items: center;
-  background: #3A4244; border: 2px solid #56605F; border-radius: 16px; padding: 10px 14px; font-weight: 800;
+  background: #3A4244; border: 2px solid #56605F; border-radius: 14px; padding: 9px 12px; font-weight: 800; font-size: .95rem;
 }
-.timeline__item .dot { margin-top: 0; width: 16px; height: 16px; border-width: 2.5px; border-color: var(--cream); }
+.timeline__item .dot { margin-top: 0; width: 14px; height: 14px; border-width: 2.5px; border-color: var(--cream); }
 .timeline__item .timeline__date { font-family: var(--font-title); font-weight: 600; color: var(--yellow); white-space: nowrap; }
-@media (min-width: 900px) {
-  .health-card--timeline { display: grid; grid-template-columns: 0.8fr 1.2fr; align-items: center; }
-  .timeline { grid-template-columns: repeat(2, 1fr); }
+
+.health-app {
+  width: min(400px, 100%); background: var(--cream); border: var(--border); border-radius: 32px;
+  box-shadow: var(--shadow); padding: 18px 16px 20px; font-size: 14px; line-height: 1.35;
 }
+.health-app__bar { display: flex; align-items: center; gap: 12px; padding-bottom: 14px; border-bottom: 2px solid #E8DFC4; }
+.health-app__bar b, .health-app__pet b { display: block; font-family: var(--font-title); font-weight: 600; font-size: 17px; }
+.health-app__bar small, .health-app__pet small { color: var(--muted); font-weight: 800; font-size: 12px; }
+.health-app__back { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; border: 2.5px solid var(--ink); background: var(--white); flex: none; }
+.health-app__pet {
+  display: flex; align-items: center; gap: 12px; margin-top: 14px;
+  background: var(--white); border: 2.5px solid var(--ink); border-radius: 18px; padding: 10px 12px; box-shadow: 3px 3px 0 var(--ink);
+}
+.health-app__avatar { width: 48px; height: 48px; border-radius: 50%; overflow: hidden; border: 2.5px solid var(--ink); flex: none; }
+.health-app__avatar .art-pacoca { width: 100%; height: 100%; }
+.health-app__list { display: grid; gap: 9px; margin-top: 12px; }
+.health-app__row {
+  display: flex; align-items: center; gap: 12px;
+  background: var(--white); border: 2.5px solid var(--ink); border-radius: 16px; padding: 9px 12px; box-shadow: 3px 3px 0 var(--ink);
+}
+.health-app__icon { display: grid; place-items: center; width: 36px; height: 36px; flex: none; border-radius: 11px; border: 2.5px solid var(--ink); }
+.health-app__icon svg { width: 19px; height: 19px; }
+.health-app__icon--red { background: var(--red); color: var(--white); }
+.health-app__icon--cyan { background: var(--cyan); }
+.health-app__icon--yellow { background: var(--yellow); }
+.health-app__icon--purple { background: var(--purple); color: var(--white); }
+.health-app__icon--green { background: var(--green); }
+.health-app__icon--orange { background: var(--orange); }
+.health-app__text { flex: 1; min-width: 0; }
+.health-app__text b { display: block; font-family: var(--font-title); font-weight: 600; font-size: 15px; }
+.health-app__text small { display: block; color: var(--muted); font-weight: 800; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.health-app__chev { flex: none; color: var(--muted); }
 
 /* ---------- Vet ---------- */
 .section--lilac { background: #F1EBFA; }
@@ -589,14 +584,12 @@ main { overflow-x: clip; }
   background: var(--yellow); border: var(--border); border-radius: 999px; box-shadow: 2px 2px 0 var(--ink);
   font-family: var(--font-title); font-weight: 600; font-size: .9rem; padding: 4px 14px; transform: rotate(3deg);
 }
-.model__art { display: grid; place-items: center; height: 210px; border: var(--border); border-radius: 18px; padding: 28px; overflow: hidden; }
+.model__art { display: grid; place-items: center; height: 220px; border: var(--border); border-radius: 18px; padding: 16px; overflow: hidden; }
 .model__art--orange { background: #FFE0BF; }
 .model__art--green { background: #CDEFE3; }
 .model__art--cyan { background: #CFF4FE; }
-.model__art { min-width: 0; }
-.model__art .tag { width: min(140px, 70%); }
-.model__art .tag--bone { width: min(220px, 100%); }
-@media (max-width: 399px) { .model__art { padding: 20px 14px; height: 180px; } }
+.model__art { grid-template: minmax(0, 1fr) / minmax(0, 1fr); }
+.model__art img { width: 100%; height: 100%; min-height: 0; object-fit: contain; filter: drop-shadow(0 12px 14px rgba(45, 52, 54, .25)); }
 .model__name { font-size: 1.6rem; margin-top: 6px; }
 .model__tagline { color: var(--muted); font-weight: 800; }
 .model__features { display: grid; gap: 8px; margin-top: 4px; }
@@ -648,61 +641,86 @@ main { overflow-x: clip; }
    Movimento
    ========================================================= */
 
-/* ---------- Coreografia do hero (≈1.6s): marca → celular → tag encosta → notificação ---------- */
-.js .brand-lockup__mascot { animation: pop-in 520ms var(--ease-spring) 60ms both; }
-.js .wordmark__letter { animation: letter-in 560ms var(--ease-spring) calc(200ms + var(--i) * 55ms) both; }
-.js .hero__sub { animation: fade-up 420ms var(--ease-out-quint) 560ms both; }
-.js .hero__tagline { animation: fade-up 460ms var(--ease-out-quint) 660ms both; }
-.js .hero__lead { animation: fade-up 460ms var(--ease-out-quint) 740ms both; }
-.js .hero__actions { animation: fade-up 460ms var(--ease-out-quint) 820ms both; }
-.js .hero__checks { animation: fade-up 460ms var(--ease-out-quint) 900ms both; }
-.js .hero__blob { animation: blob-in 700ms var(--ease-out-quint) 150ms both; }
-.js .phone { animation: phone-in 760ms var(--ease-out-quint) 300ms both; }
-.js .hero__tag { transform-origin: 50% -6%; animation: tag-swing 1100ms var(--ease-out-cubic) 700ms both, tag-sway 4.5s var(--ease-in-out-cubic) 1.9s infinite; }
-.js .nfc-waves i { animation-delay: 1.35s; }
-.js .nfc-waves i:nth-child(2) { animation-delay: 1.85s; }
-.js .nfc-waves i:nth-child(3) { animation-delay: 2.35s; }
-.js .hero__toast { animation: toast-in 420ms var(--ease-spring) 1.55s both, floaty 5s ease-in-out 2.1s infinite; }
+/* ---------- Momento focal do hero (skill Animate: choreograph) ----------
+   Tempo  | Elemento            | Papel     | Movimento
+   0      | blob                | decoração | só opacidade
+   0      | mascote             | lead      | sobe 16px + escala .94 → 1
+   120+   | letras do wordmark  | lead      | sobem 40%, atraso decrescente (não uniforme)
+   150    | celular             | lead      | sobe 48px, gira 6° → 3°
+   380    | subtítulo + frase   | apoio     | juntos, sobem 10px
+   480    | texto, botões, ✓    | apoio     | juntos, sobem 8px
+   650    | tag                 | lead      | balança no aro até encostar no celular
+   1450   | ondas NFC           | acento    | pulso no impacto, repete a cada 6s
+   1450   | tela bloqueada      | estático  | some (opacidade)
+   1450   | cartão do pet       | lead      | abre de baixo para cima (clip-path)
+   2050   | notificação         | apoio     | aparece com 10px de subida
+   Nada bloqueia clique: os botões ficam usáveis assim que aparecem. */
+.js .hero__blob { animation: fade-in 500ms linear both; }
+.js .brand-lockup__mascot { animation: rise-in 600ms var(--ease-out-expo) both; --rise: 16px; --from-scale: .94; }
+.js .wordmark__letter {
+  animation: letter-in 520ms var(--ease-out-expo) both;
+  animation-delay: calc(120ms + var(--i) * 62ms - var(--i) * var(--i) * 4ms);
+}
+.js .phone { animation: phone-in 700ms var(--ease-out-expo) 150ms both; }
+.js .hero__sub, .js .hero__tagline { animation: rise-in 500ms var(--ease-out-expo) 380ms both; --rise: 10px; }
+.js .hero__lead, .js .hero__actions, .js .hero__checks { animation: rise-in 500ms var(--ease-out-expo) 480ms both; --rise: 8px; }
+.js .hero__tag { animation: tag-swing 1100ms var(--ease-out-cubic) 650ms both; }
+.js .nfc-waves i { animation: nfc-burst 6s var(--ease-out-expo) 1450ms infinite; }
+.js .nfc-waves i:nth-child(2) { animation-delay: 1570ms; }
+.js .nfc-waves i:nth-child(3) { animation-delay: 1690ms; }
+.hero.is-offscreen .nfc-waves i { animation-play-state: paused; }
+.js .phone__lock { animation: fade-out 260ms ease-out 1450ms both; }
+.js .phone__card { animation: card-open 650ms var(--ease-out-expo) 1450ms both; }
+.js .hero__toast { animation: toast-in 450ms var(--ease-out-expo) 2050ms both; }
 
-@keyframes pop-in { from { opacity: 0; transform: scale(.6) translateY(20px); } }
-@keyframes letter-in { from { opacity: 0; transform: translateY(55%) rotate(-10deg) scale(.8); } }
-@keyframes fade-up { from { opacity: 0; transform: translateY(16px); } }
-@keyframes blob-in { from { opacity: 0; transform: rotate(-14deg) scale(.82); } to { opacity: 1; transform: rotate(-6deg); } }
-@keyframes phone-in { from { opacity: 0; transform: translateY(60px) rotate(8deg); } to { opacity: 1; transform: rotate(3deg); } }
+@keyframes fade-in { from { opacity: 0; } }
+@keyframes fade-out { to { opacity: 0; visibility: hidden; } }
+@keyframes rise-in { from { opacity: 0; transform: translateY(var(--rise, 12px)) scale(var(--from-scale, 1)); } }
+@keyframes letter-in { from { opacity: 0; transform: translateY(40%); } }
+@keyframes phone-in { from { opacity: 0; transform: translateY(48px) rotate(6deg); } to { opacity: 1; transform: rotate(3deg); } }
 @keyframes tag-swing {
-  0% { opacity: 0; transform: translate(-40px, -60px) rotate(-60deg); }
-  45% { opacity: 1; transform: translate(0, 0) rotate(8deg); }
-  70% { transform: rotate(-16deg); }
+  0% { opacity: 0; transform: translate(-36px, -70px) rotate(-48deg); }
+  35% { opacity: 1; }
+  62% { transform: translate(0, 0) rotate(6deg); }
+  82% { transform: rotate(-13deg); }
   100% { transform: rotate(-10deg); }
 }
-@keyframes tag-sway { 50% { transform: rotate(-5deg); } }
-@keyframes toast-in { from { opacity: 0; transform: rotate(4deg) translateY(10px) scale(.7); } to { opacity: 1; transform: rotate(4deg); } }
-@keyframes wiggle { 25% { transform: rotate(-4deg); } 50% { transform: rotate(3deg); } 75% { transform: rotate(-2deg); } }
-@keyframes swing { 20% { transform: rotate(14deg); } 45% { transform: rotate(-10deg); } 70% { transform: rotate(5deg); } 100% { transform: rotate(0); } }
+@keyframes nfc-burst {
+  0% { transform: scale(.35); opacity: 0; }
+  3% { opacity: 1; }
+  16% { transform: scale(1.15); opacity: 0; }
+  100% { transform: scale(1.15); opacity: 0; }
+}
+@keyframes card-open { from { clip-path: inset(100% 0 0 0 round 34px); } to { clip-path: inset(0 0 0 0 round 34px); } }
+@keyframes toast-in { from { opacity: 0; transform: rotate(4deg) translateY(10px) scale(.96); } to { opacity: 1; transform: rotate(4deg); } }
 
 /* ---------- Header compacto ao rolar ---------- */
-.nav-bar { transition: box-shadow var(--dur-enter) var(--ease-out-quint), background-color var(--dur-enter) ease; }
-.nav-logo img { transition: transform var(--dur-enter) var(--ease-out-quint); transform-origin: left center; }
+.nav-bar { transition: box-shadow var(--dur-enter) var(--ease-out-expo); }
+.nav-logo img { transition: transform var(--dur-enter) var(--ease-out-expo); transform-origin: left center; }
 .site-header.is-scrolled .nav-bar { box-shadow: 6px 6px 0 var(--ink); }
 .site-header.is-scrolled .nav-logo img { transform: scale(.88); }
 
-/* ---------- Cards que respondem ao hover (sombra sólida cresce) ---------- */
-.step, .health-card, .model, .faq__item, .vet-steps__item .vet-steps__n {
-  transition: transform 220ms var(--ease-out-quint), box-shadow 220ms var(--ease-out-quint);
+/* ---------- Camada única de hover (taste skill, regra 5) ----------
+   Só o que é clicável responde: botões sobem e afundam, links desenham o sublinhado,
+   perguntas do FAQ mudam o fundo. Cards que não são links ficam parados. */
+.footer-col a, .nav-app {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat; background-position: 0 100%; background-size: 0% 2px;
+  transition: background-size 250ms var(--ease-out-expo), background-color var(--dur-hover) ease;
 }
+.nav-app { background-position: 14px calc(100% - 8px); }
 @media (hover: hover) {
-  .step:hover, .health-card:hover, .model:hover { transform: translate(-3px, -3px); box-shadow: 9px 9px 0 var(--ink); }
-  .model--featured:hover { box-shadow: 11px 11px 0 var(--ink); }
-  .faq__item:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var(--ink); }
-  .health-card:hover .icon-badge, .step:hover .icon-badge { animation: wiggle 500ms var(--ease-in-out-cubic); }
-  .model:hover .tag { animation: swing 900ms var(--ease-out-cubic); }
+  .footer-col a:hover { background-size: 100% 2px; text-decoration: none; }
+  .nav-app:hover { background-size: calc(100% - 28px) 2px; }
+  .link:hover, .final-cta__app:hover { text-decoration-thickness: 3px; }
+  .faq__item summary:hover { background: var(--white); }
 }
-.model__art .tag { transform-origin: 50% -6%; }
-.model__art .tag--bone { transform-origin: -4% 50%; }
+.link, .final-cta__app { transition: text-decoration-thickness var(--dur-hover) ease; }
+.faq__item summary { border-radius: 18px; transition: background-color var(--dur-hover) ease; }
 
 /* ---------- FAQ: resposta entra suave ---------- */
-.faq__item[open] p { animation: fade-up var(--dur-enter) var(--ease-out-quint); }
-.faq__item summary::after { transition: transform var(--dur-enter) var(--ease-spring); }
+.faq__item[open] p { animation: rise-in var(--dur-enter) var(--ease-out-expo); --rise: 6px; }
+.faq__item summary::after { transition: transform 220ms var(--ease-out-expo); }
 
 /* ---------- Caminho que se desenha entre os passos ---------- */
 .steps-wrap { position: relative; }
@@ -742,7 +760,7 @@ html:not(.js) .tutor-panel { display: none; }
 }
 .switch__thumb {
   position: absolute; top: 2px; left: 2px; width: 17px; height: 17px; border-radius: 50%;
-  background: var(--white); border: 2px solid var(--ink); transition: transform 260ms var(--ease-spring);
+  background: var(--white); border: 2px solid var(--ink); transition: transform 260ms var(--ease-out-expo);
 }
 .switch[aria-checked="true"] .switch__track { background: var(--green); }
 .switch[aria-checked="true"] .switch__thumb { transform: translateX(20px); }
@@ -754,10 +772,24 @@ html:not(.js) .tutor-panel { display: none; }
 .mock-field.is-off { grid-template-rows: 0fr; opacity: 0; transition-duration: 240ms, 160ms; }
 .mock-profile--full { padding-bottom: 18px; }
 
-/* ---------- Movimento reduzido ---------- */
+/* ---------- Movimento reduzido ----------
+   A coreografia colapsa: tudo aparece junto, só com opacidade, sem atraso e sem deslocamento.
+   Feedback de estado (cores, interruptores, campos do cartão) continua, sem movimento. */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  *, *::before, *::after { animation: none !important; transition: none !important; }
-  .js .reveal, .js .reveal:not(.is-visible) { opacity: 1; transform: none; }
-  .js .steps__path { clip-path: none; }
+  .js .hero__blob, .js .brand-lockup__mascot, .js .wordmark__letter, .js .phone, .js .hero__sub, .js .hero__tagline,
+  .js .hero__lead, .js .hero__actions, .js .hero__checks, .js .hero__tag, .js .hero__toast {
+    animation: fade-in 200ms ease-out both !important;
+  }
+  .js .phone__lock { display: none; }
+  .js .phone__card { animation: none; clip-path: none; }
+  .nfc-waves { display: none; }
+  .js .steps__path { clip-path: none; transition: none; }
+  .faq__item[open] p { animation: fade-in 150ms ease-out; }
+  .btn, .btn:hover, .btn:active, .btn .icon, .nav-logo img, .switch__thumb, .faq__item summary::after { transition-property: background-color, color, box-shadow; transform: none; }
+  .switch[aria-checked="true"] .switch__thumb { transform: translateX(20px); }
+  .faq__item[open] summary::after { transform: rotate(45deg); }
+  .mock-field { transition: opacity 150ms linear; }
+  .sticky-cta { transition: opacity 150ms linear; }
+  .sticky-cta.is-hidden { transform: none; }
 }
