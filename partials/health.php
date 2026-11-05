@@ -55,7 +55,7 @@ $timeline = [
           <?php foreach ($timeline as $event): ?>
             <li class="timeline__item">
               <span class="dot dot--<?= e($event['color']) ?>" aria-hidden="true"></span>
-              <time><?= e($event['date']) ?></time>
+              <span class="timeline__date"><?= e($event['date']) ?></span>
               <span><?= e($event['label']) ?></span>
             </li>
           <?php endforeach; ?>

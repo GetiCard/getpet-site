@@ -177,7 +177,7 @@ main { overflow-x: clip; }
 .nav-links { display: flex; gap: 2px; }
 .nav-links a, .nav-app {
   display: block; padding: 10px 14px; border-radius: 999px;
-  font-weight: 800; font-size: 0.98rem; text-decoration: none;
+  font-weight: 800; font-size: 0.98rem; text-decoration: none; white-space: nowrap;
   transition: background-color .15s ease;
 }
 .nav-links a:hover, .nav-app:hover { background: var(--cream); }
@@ -269,9 +269,10 @@ main { overflow-x: clip; }
 @media (max-width: 899px) {
   .sticky-cta {
     display: block; position: fixed; z-index: 40; left: 16px; right: 16px; bottom: 14px;
-    transition: transform .3s ease, opacity .3s ease;
+    transition: transform .3s ease, opacity .3s ease, visibility 0s;
   }
-  .sticky-cta.is-hidden { transform: translateY(160%); opacity: 0; pointer-events: none; }
+  /* visibility tira o botão escondido da ordem do Tab; o atraso preserva a animação de saída */
+  .sticky-cta.is-hidden { transform: translateY(160%); opacity: 0; visibility: hidden; pointer-events: none; transition: transform .3s ease, opacity .3s ease, visibility 0s .3s; }
   .site-footer { padding-bottom: 110px; }
 }
 
@@ -438,7 +439,8 @@ main { overflow-x: clip; }
   font-family: var(--font-title); font-weight: 700; font-size: 1.5rem;
 }
 @media (min-width: 900px) {
-  .step:nth-child(2), .js .step.reveal:nth-child(2).is-visible { transform: translateY(28px); }
+  /* deslocamento por top (não transform) para não conflitar com a animação .reveal */
+  .step:nth-child(2) { top: 28px; }
 }
 
 /* ---------- Lista de recursos ---------- */
@@ -493,7 +495,7 @@ main { overflow-x: clip; }
   background: #3A4244; border: 2px solid #56605F; border-radius: 16px; padding: 10px 14px; font-weight: 800;
 }
 .timeline__item .dot { margin-top: 0; width: 16px; height: 16px; border-width: 2.5px; border-color: var(--cream); }
-.timeline__item time { font-family: var(--font-title); font-weight: 600; color: var(--yellow); white-space: nowrap; }
+.timeline__item .timeline__date { font-family: var(--font-title); font-weight: 600; color: var(--yellow); white-space: nowrap; }
 @media (min-width: 900px) {
   .health-card--timeline { display: grid; grid-template-columns: 0.8fr 1.2fr; align-items: center; }
   .timeline { grid-template-columns: repeat(2, 1fr); }

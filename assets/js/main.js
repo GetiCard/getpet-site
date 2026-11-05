@@ -52,12 +52,19 @@
     revealItems.forEach(function (el) { el.classList.add('is-visible'); });
   }
 
-  /* ---------- CTA fixo some quando o CTA final aparece ---------- */
   var sticky = document.querySelector('[data-sticky-cta]');
   var finalCta = document.getElementById('cta-final');
-  if (sticky && finalCta && 'IntersectionObserver' in window) {
-    new IntersectionObserver(function (entries) {
-      sticky.classList.toggle('is-hidden', entries[0].isIntersecting);
-    }, { threshold: 0.2 }).observe(finalCta);
+  /* ---------- CTA fixo: some enquanto o botão do hero ou o CTA final estão na tela ---------- */
+  var heroActions = document.querySelector('.hero__actions');
+  if (sticky && 'IntersectionObserver' in window) {
+    var visibleCtas = new Set();
+    var ctaObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) visibleCtas.add(entry.target);
+        else visibleCtas.delete(entry.target);
+      });
+      sticky.classList.toggle('is-hidden', visibleCtas.size > 0);
+    }, { threshold: 0.2 });
+    [heroActions, finalCta].forEach(function (el) { if (el) ctaObserver.observe(el); });
   }
 })();

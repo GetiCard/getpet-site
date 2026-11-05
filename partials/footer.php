@@ -20,7 +20,8 @@
       <h2 class="footer-title">Fale com a gente</h2>
       <ul>
         <li><a href="<?= e($wa) ?>"<?= link_attrs($wa) ?>>WhatsApp</a></li>
-        <li><a href="https://instagram.com/<?= e($config['instagram']) ?>" target="_blank" rel="noopener">@<?= e($config['instagram']) ?></a></li>
+        <?php $instagram = ltrim((string) $config['instagram'], '@'); ?>
+        <li><a href="https://instagram.com/<?= e($instagram) ?>" target="_blank" rel="noopener">@<?= e($instagram) ?></a></li>
         <li><a href="mailto:<?= e($config['support_email']) ?>"><?= e($config['support_email']) ?></a></li>
       </ul>
     </div>

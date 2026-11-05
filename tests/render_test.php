@@ -73,5 +73,32 @@ $emptyHtml = render_with($empty);
 check('sem número: nenhum link #modelos abre nova aba', preg_match('/href="#modelos"[^>]*target="_blank"/', $emptyHtml) === 0);
 check('sem número: botões apontam para #modelos', substr_count($emptyHtml, 'href="#modelos"') >= 5);
 
+// Ajustes menores
+$noBadge = $c;
+unset($noBadge['models'][0]['badge']);
+set_error_handler(function (int $no, string $msg) { throw new ErrorException($msg); });
+try {
+    $ok = str_contains(render_with($noBadge), 'GetPet Basic');
+} catch (Throwable $t) {
+    $ok = false;
+}
+restore_error_handler();
+check('modelo sem chave badge não gera aviso', $ok);
+
+$_SERVER['HTTP_HOST'] = 'getpet.test:8000';
+$hostHtml = render_with($c);
+unset($_SERVER['HTTP_HOST']);
+check('og:image absoluto quando site_url está vazio', str_contains($hostHtml, 'content="http://getpet.test:8000/assets/img/og-image.jpg"'));
+
+foreach ($c['models'] as $m) {
+    check("botão Quero este com nome do modelo {$m['id']} para leitor de tela", str_contains($html, 'Quero este<span class="sr-only"> ' . e($m['name']) . '</span>'));
+}
+check('linha do tempo sem <time> inválido', !str_contains($html, '<time>'));
+
+$at = $c;
+$at['instagram'] = '@geticompany';
+$atHtml = render_with($at);
+check('instagram com @ não duplica', !str_contains($atHtml, '@@') && str_contains($atHtml, 'instagram.com/geticompany"'));
+
 echo $failures === 0 ? "\nOK\n" : "\n$failures falha(s)\n";
 exit($failures === 0 ? 0 : 1);

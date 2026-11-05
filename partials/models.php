@@ -12,8 +12,8 @@ $tagByModel = ['basic' => 'bone', 'nfc' => 'round', 'location' => 'dark'];
 
     <ul class="models">
       <?php foreach ($config['models'] as $i => $model): ?>
-        <li class="card model<?= $model['badge'] ? ' model--featured' : '' ?> reveal" data-delay="<?= $i + 1 ?>">
-          <?php if ($model['badge']): ?>
+        <li class="card model<?= !empty($model['badge']) ? ' model--featured' : '' ?> reveal" data-delay="<?= $i + 1 ?>">
+          <?php if (!empty($model['badge'])): ?>
             <span class="model__badge"><?= e($model['badge']) ?></span>
           <?php endif; ?>
           <div class="model__art model__art--<?= e($model['color']) ?>">
@@ -31,7 +31,7 @@ $tagByModel = ['basic' => 'bone', 'nfc' => 'round', 'location' => 'dark'];
             <?php $modelHref = wa_link($config['whatsapp'], $model['message']); ?>
             <a class="btn btn--primary btn--block" href="<?= e($modelHref) ?>"<?= link_attrs($modelHref) ?>>
               <?php include __DIR__ . '/icon-whatsapp.php'; ?>
-              Quero este
+              Quero este<span class="sr-only"> <?= e($model['name']) ?></span>
             </a>
           </div>
         </li>

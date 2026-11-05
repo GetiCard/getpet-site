@@ -2,7 +2,16 @@
 $title = 'Getpet — A identidade digital do seu pet | Tag com NFC e QR Code';
 $description = 'Tag com NFC e QR Code para a coleira: quem encontrar seu pet aproxima o celular e fala com você na hora. Perfil do pet, prontuário de saúde e acesso para o veterinário em um só app.';
 $base = rtrim($config['site_url'], '/');
-$ogImage = ($base !== '' ? $base . '/' : '') . 'assets/img/og-image.jpg';
+// Sem site_url, monta a URL absoluta a partir do endereço acessado (as prévias de redes sociais exigem URL completa).
+$requestBase = '';
+if (!empty($_SERVER['HTTP_HOST'])) {
+    $https = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || ($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '') === 'https';
+    $requestBase = ($https ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'];
+}
+$ogImage = ($base !== '' ? $base : $requestBase) . '/assets/img/og-image.jpg';
+if ($base === '' && $requestBase === '') {
+    $ogImage = 'assets/img/og-image.jpg';
+}
 ?>
 <head>
 <meta charset="utf-8">
