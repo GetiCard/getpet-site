@@ -1,50 +1,43 @@
-# Getpet — landing page
+# Getpet
 
-Landing page do **Getpet**, a identidade digital para pets (tag com NFC e QR Code, cartão do pet, GetPet Saúde e GetPet Vet). Uma solução Geti Company · tecnologia Getcard.
+**A identidade digital do seu pet.** Uma tag com NFC e QR Code para a coleira que conecta quem encontra um pet ao tutor dele, em um toque.
 
-## Requisitos
+Uma solução **Geti Company**, com tecnologia **Getcard**.
 
-- PHP 8.0 ou superior (sem extensões extras, sem banco de dados, sem build).
+## Como funciona
 
-## Rodar localmente
+1. **Coloque a tag e crie o perfil.** O tutor prende a tag na coleira e cadastra o pet no app: fotos, características e contatos.
+2. **Encontrou? É só aproximar.** Quem encontrar o pet encosta o celular na tag (NFC) ou aponta a câmera para o QR Code. Ninguém precisa instalar nada.
+3. **Vocês se falam na hora.** Abre o cartão do pet com o botão "Falar com o Tutor", direto no WhatsApp, na ligação ou no e-mail.
 
-```bash
-php -S localhost:8000
-```
+## O que o Getpet oferece
 
-Abra http://localhost:8000.
+### Cartão do pet
+O perfil público que aparece para quem lê a tag: foto e galeria, raça, idade, sexo, peso e porte, pelagem e marcas, microchip, temperamento e favoritos, e os contatos do tutor, co-tutores e contato de emergência. O tutor decide o que aparece.
 
-## Onde editar
+### Cartaz de pet perdido
+Em um toque o Getpet monta um cartaz de busca com a foto do pet, o QR Code e o telefone do tutor, pronto para stories e grupos, além de um link do perfil para compartilhar.
 
-| O quê | Arquivo |
-|---|---|
-| Número do WhatsApp, mensagens prontas, link do app, Instagram, e-mail | `config.php` |
-| Modelos de tag (nome, descrição, recursos, mensagem do WhatsApp) | `config.php` → `models` |
-| URL pública do site (para a prévia ao compartilhar no WhatsApp/redes) | `config.php` → `site_url` |
-| Textos de cada seção | `partials/<seção>.php` |
-| Cores, fontes e estilos | `assets/css/style.css` (tokens no início do arquivo) |
+### GetPet Saúde
+O prontuário do pet no app: alergias e condições, vacinas e prevenção (vacinas, vermífugos e antipulgas), medicamentos, consultas e exames, peso e diário, documentos (exames, receitas e laudos) e uma linha do tempo com tudo em ordem de data.
 
-Ao publicar, preencha `site_url` (ex.: `https://getpet.com.br`) para que a imagem de compartilhamento (`og:image`) use o endereço completo.
+### GetPet Vet
+Na consulta, o tutor gera um código de acesso e o veterinário passa a ver e registrar atendimentos, vacinas e exames no prontuário pelo tempo que o tutor escolher. O tutor vê quem tem acesso e revoga quando quiser. Só veterinários com CRMV verificado pela equipe do Getpet podem acessar.
 
-## Estrutura
+## Modelos de tag
 
-```
-index.php          monta a página
-config.php         configuração editável
-lib/helpers.php    e() (escape HTML) e wa_link() (link do WhatsApp)
-partials/          uma seção por arquivo + ilustrações (tag, QR, pet de exemplo)
-assets/            CSS, JS e imagens
-tests/             testes em PHP puro
-docs/superpowers/  spec e plano de implementação
-```
+| Modelo | Para quem | Recursos |
+|---|---|---|
+| **GetPet Basic** | Identificação prática e acessível | Tag em formato de osso, identificação via QR Code, perfil digital com os contatos do tutor |
+| **GetPet NFC** | Identificação inteligente com mais praticidade | Tag redonda, identificação por aproximação (NFC) e via QR Code |
+| **GetPet Localização** | Identificação completa e localização | NFC e QR Code, localização por Bluetooth em redes colaborativas (Apple Find My e Android Find Hub) e sinal sonoro para ajudar na procura |
 
-## Testes
+Todos os modelos se integram ao app: Identificação, Saúde e Vet.
 
-```bash
-php tests/helpers_test.php
-php tests/render_test.php
-```
+## Lançamento
 
-## Publicar
+A tag Getpet está chegando. Para garantir a sua, fale com a equipe pelo WhatsApp.
 
-Envie os arquivos para qualquer hospedagem com PHP 8 (cPanel, Hostinger, Locaweb etc.). Não é necessário enviar `docs/`, `tests/` nem os arquivos originais da raiz (`logo - *.jpeg`, `Portifólio - Getpet.pdf`).
+- App: [getpet.digital](https://getpet.digital/login)
+- Instagram: [@geticompany](https://instagram.com/geticompany)
+- Suporte: suporte@getcard.digital
