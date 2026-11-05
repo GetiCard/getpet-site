@@ -377,7 +377,7 @@ main { overflow-x: clip; }
 }
 
 .hero__toast {
-  position: absolute; right: 0; bottom: 2%; max-width: 236px; z-index: 3;
+  position: absolute; top: -30px; right: -34px; width: 248px; z-index: 3;
   display: flex; gap: 10px; align-items: center;
   background: var(--white); border: var(--border); border-radius: 18px; box-shadow: var(--shadow-sm);
   padding: 10px 14px; font-size: .9rem; line-height: 1.3;
@@ -389,7 +389,8 @@ main { overflow-x: clip; }
 @media (max-width: 599px) {
   .hero__visual { min-height: 480px; }
   .hero__tag { width: 128px; left: -6px; }
-  .hero__toast { right: -4px; bottom: -1%; max-width: 200px; }
+  .hero__toast { top: -34px; right: -14px; width: 214px; padding: 8px 12px; }
+  .hero__toast small { font-size: .74rem; }
   .nfc-waves { right: -30px; width: 56px; height: 56px; }
 }
 
@@ -651,14 +652,16 @@ main { overflow-x: clip; }
    780    | ondas NFC       | acento   | um pulso no impacto
    820    | tela bloqueada  | estático | some (opacidade)
    820    | cartão do pet   | lead     | abre de baixo para cima (clip-path, 520 ms)
-   1080   | notificação     | apoio    | aparece com 10px de subida (400 ms) */
+   1080   | notificação     | apoio    | desce do topo do celular como mensagem chegando (520 ms)
+   1460   | ícone da msg    | acento   | um "ping" no ícone quando a mensagem assenta */
 .js .hero__tag { animation: tag-swing 900ms var(--ease-out-cubic) both; }
 .js .nfc-waves i { animation: nfc-burst 700ms var(--ease-out-expo) 780ms both; }
 .js .nfc-waves i:nth-child(2) { animation-delay: 860ms; }
 .js .nfc-waves i:nth-child(3) { animation-delay: 940ms; }
 .js .phone__lock { animation: fade-out 240ms ease-out 820ms both; }
 .js .phone__card { animation: card-open 520ms var(--ease-out-expo) 820ms both; }
-.js .hero__toast { animation: toast-in 400ms var(--ease-out-expo) 1080ms both; }
+.js .hero__toast { animation: toast-in 520ms var(--ease-out-expo) 1080ms both; transform-origin: 50% 0; }
+.js .hero__toast-icon { animation: toast-ping 360ms var(--m-ease) 1460ms both; }
 
 @keyframes fade-in { from { opacity: 0; } }
 @keyframes fade-out { to { opacity: 0; visibility: hidden; } }
@@ -672,7 +675,12 @@ main { overflow-x: clip; }
 }
 @keyframes nfc-burst { 0% { transform: scale(.35); opacity: 0; } 20% { opacity: 1; } 100% { transform: scale(1.15); opacity: 0; } }
 @keyframes card-open { from { clip-path: inset(100% 0 0 0 round 34px); } to { clip-path: inset(0 0 0 0 round 34px); } }
-@keyframes toast-in { from { opacity: 0; transform: translateY(10px) scale(.96); } }
+@keyframes toast-in {
+  from { opacity: 0; transform: translateY(-28px) scale(.94); }
+  60% { opacity: 1; }
+  to { opacity: 1; transform: none; }
+}
+@keyframes toast-ping { 0% { transform: scale(1); } 40% { transform: scale(1.18); } 100% { transform: scale(1); } }
 
 /* ---------- Camada de hover (Taste Skill: motion.md) ----------
    Só o que é clicável responde. Botões sobem 1px e afundam ao clicar; links do menu e do
@@ -780,6 +788,7 @@ html:not(.js) .tutor-panel { display: none; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .js .hero__tag, .js .hero__toast { animation: fade-in 200ms ease-out both; }
+  .js .hero__toast-icon { animation: none; }
   .js .phone__lock { display: none; }
   .js .phone__card { animation: none; clip-path: none; }
   .nfc-waves { display: none; }

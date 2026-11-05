@@ -46,6 +46,13 @@
             <?php $profileVariant = 'compact'; include __DIR__ . '/mock-profile.php'; ?>
           </div>
         </div>
+        <!-- Notificação de mensagem: chega pelo topo do celular, acima da foto do pet -->
+        <div class="hero__toast" aria-hidden="true">
+          <span class="hero__toast-icon">
+            <svg viewBox="0 0 24 24" width="18" height="18"><path d="M4 5h16v11H9l-5 4V5Z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/></svg>
+          </span>
+          <span><b>Encontrei o Paçoca!</b><small>Ele está bem, na praça do bairro.</small></span>
+        </div>
       </div>
 
       <div class="hero__tag">
@@ -53,12 +60,6 @@
         <img src="assets/img/tags/tag-hero.webp" alt="Tag Getpet redonda com NFC e QR Code" width="339" height="344">
       </div>
 
-      <div class="hero__toast" aria-hidden="true">
-        <span class="hero__toast-icon">
-          <svg viewBox="0 0 24 24" width="18" height="18"><path d="M4 5h16v11H9l-5 4V5Z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/></svg>
-        </span>
-        <span><b>Encontrei o Paçoca!</b><small>Ele está bem, na praça do bairro.</small></span>
-      </div>
     </div>
   </div>
 </section>
