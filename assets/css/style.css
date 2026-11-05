@@ -120,15 +120,17 @@ main { overflow-x: clip; }
 }
 
 /* Destaque colorido em títulos (sublinhado de marca-texto) */
-.mark { position: relative; white-space: nowrap; z-index: 0; }
-.mark::after {
-  content: ""; position: absolute; left: -4px; right: -4px; bottom: 0.06em; height: 0.36em;
-  background: var(--yellow); border-radius: 6px; z-index: -1;
+.mark {
+  /* marca-texto que acompanha a quebra de linha (antes era nowrap e estourava no celular) */
+  --mark: var(--yellow);
+  background-image: linear-gradient(transparent 58%, var(--mark) 58%, var(--mark) 92%, transparent 92%);
+  -webkit-box-decoration-break: clone; box-decoration-break: clone;
+  padding-inline: .08em; border-radius: 6px;
 }
-.mark--green::after { background: #8FE3C9; }
-.mark--cyan::after { background: #A6EEFD; }
-.mark--purple::after { background: #D9C2E6; }
-.mark--red::after { background: #F7B6BC; }
+.mark--green { --mark: #8FE3C9; }
+.mark--cyan { --mark: #A6EEFD; }
+.mark--purple { --mark: #D9C2E6; }
+.mark--red { --mark: #F7B6BC; }
 
 /* ---------- Componentes ---------- */
 
@@ -293,7 +295,8 @@ main { overflow-x: clip; }
 .section--red .lead { color: #FFE4E7; }
 
 /* Split: texto + visual */
-.split { display: grid; gap: clamp(40px, 6vw, 72px); align-items: start; }
+.split { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(40px, 6vw, 72px); align-items: start; }
+.hero__grid > *, .split > * { min-width: 0; }
 @media (min-width: 900px) {
   .split { grid-template-columns: 1fr 1fr; }
   .split--reverse .split__copy { order: 2; }
@@ -374,7 +377,7 @@ main { overflow-x: clip; }
 }
 
 .hero__toast {
-  position: absolute; right: 0; top: 10%; max-width: 236px; z-index: 3;
+  position: absolute; right: 0; bottom: 2%; max-width: 236px; z-index: 3;
   display: flex; gap: 10px; align-items: center;
   background: var(--white); border: var(--border); border-radius: 18px; box-shadow: var(--shadow-sm);
   padding: 10px 14px; font-size: .9rem; line-height: 1.3;
@@ -386,7 +389,7 @@ main { overflow-x: clip; }
 @media (max-width: 599px) {
   .hero__visual { min-height: 480px; }
   .hero__tag { width: 128px; left: -6px; }
-  .hero__toast { right: -4px; max-width: 200px; }
+  .hero__toast { right: -4px; bottom: -1%; max-width: 200px; }
   .nfc-waves { right: -30px; width: 56px; height: 56px; }
 }
 
