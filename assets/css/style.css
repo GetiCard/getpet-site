@@ -9,7 +9,7 @@
   --cream-deep: #FFF1CC;
   --ink: #2D3436;
   --white: #FFFFFF;
-  --muted: #5B6670;
+  --muted: #434B54;
 
   --orange: #FF9F43;
   --green: #10AC84;
@@ -31,7 +31,7 @@
   --font-title: "Fredoka", "Nunito", system-ui, sans-serif;
   --font-body: "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
 
-  --container: 1180px;
+  --container: 1264px;
   --gutter: clamp(16px, 4vw, 32px);
   --header-h: 84px;
 
@@ -40,6 +40,7 @@
   --ease-out-cubic: cubic-bezier(.33, 1, .68, 1);
   --ease-in-out-cubic: cubic-bezier(.645, .045, .355, 1);
   --ease-out-expo: cubic-bezier(.16, 1, .3, 1);
+  --m-ease: cubic-bezier(.2, .8, .2, 1);
   --dur-hover: 150ms;
   --dur-enter: 300ms;
   --dur-exit: 220ms;
@@ -122,7 +123,7 @@ main { overflow-x: clip; }
 .mark { position: relative; white-space: nowrap; z-index: 0; }
 .mark::after {
   content: ""; position: absolute; left: -4px; right: -4px; bottom: 0.06em; height: 0.36em;
-  background: var(--yellow); border-radius: 6px; z-index: -1; transform: rotate(-1deg);
+  background: var(--yellow); border-radius: 6px; z-index: -1;
 }
 .mark--green::after { background: #8FE3C9; }
 .mark--cyan::after { background: #A6EEFD; }
@@ -142,12 +143,12 @@ main { overflow-x: clip; }
   padding: 16px 26px; min-height: 56px;
   border: var(--border); border-radius: 999px; box-shadow: 4px 4px 0 var(--ink);
   background: var(--white); color: var(--ink); text-decoration: none; cursor: pointer;
-  transition: transform var(--dur-hover) ease, box-shadow var(--dur-hover) ease, background-color var(--dur-hover) ease;
+  transition: transform 200ms var(--m-ease), box-shadow 200ms var(--m-ease), background-color 200ms var(--m-ease);
 }
 @media (hover: hover) {
-  .btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--ink); }
+  .btn:hover { transform: translate(-1px, -1px); box-shadow: 5px 5px 0 var(--ink); transition-duration: 140ms; }
 }
-.btn:active { transform: translate(3px, 3px) scale(.97); box-shadow: 1px 1px 0 var(--ink); transition-duration: 120ms; }
+.btn:active { transform: translate(1px, 1px) scale(.985); box-shadow: 3px 3px 0 var(--ink); transition-duration: 90ms; }
 .btn .icon { transition: transform 300ms var(--ease-out-expo); }
 .btn--primary { background: var(--green-strong); color: var(--white); }
 .btn--primary:hover { background: #096A51; }
@@ -215,7 +216,8 @@ main { overflow-x: clip; }
   :root { --header-h: 76px; }
   .nav-bar { padding: 6px 6px 6px 14px; min-height: 60px; gap: 10px; }
   .nav-logo img { height: 40px; }
-  .nav-cta { margin-left: auto; }
+  .nav-cta { display: none; }
+  .nav-toggle { margin-left: auto; }
   .nav-toggle { display: grid; }
   /* Sem JS o menu fica visível como lista rolável abaixo da barra */
   .nav-menu {
@@ -285,7 +287,7 @@ main { overflow-x: clip; }
 .section--red .lead { color: #FFE4E7; }
 
 /* Split: texto + visual */
-.split { display: grid; gap: clamp(40px, 6vw, 72px); align-items: center; }
+.split { display: grid; gap: clamp(40px, 6vw, 72px); align-items: start; }
 @media (min-width: 900px) {
   .split { grid-template-columns: 1fr 1fr; }
   .split--reverse .split__copy { order: 2; }
@@ -298,8 +300,8 @@ main { overflow-x: clip; }
 @media (min-width: 900px) { .hero__grid { grid-template-columns: 1.08fr 0.92fr; } }
 /* Marca primeiro: mascote + wordmark no estilo do logo */
 .brand-lockup { display: inline-grid; justify-items: center; }
-.brand-lockup__mascot { width: clamp(140px, 13vw, 180px); height: auto; position: relative; z-index: 0; }
-.hero__title { margin-top: -0.12em; position: relative; z-index: 1; text-align: center; }
+.brand-lockup__mascot { width: clamp(132px, 12vw, 172px); height: auto; }
+.hero__title { margin-top: 10px; text-align: center; }
 .wordmark {
   display: block; font-family: var(--font-title); font-weight: 700; letter-spacing: -0.02em; line-height: .9;
   font-size: clamp(4rem, 2.6rem + 5vw, 6rem);
@@ -317,11 +319,13 @@ main { overflow-x: clip; }
   .hero__copy { text-align: center; }
   .hero__copy .brand-lockup { margin-inline: auto; }
   .hero__tagline, .hero__lead { margin-inline: auto; }
-  .hero__actions, .hero__checks { justify-content: center; }
+  .hero__actions { justify-content: center; }
+  .hero__checks { margin-inline: auto; text-align: left; }
 }
 .hero__lead strong { color: var(--ink); }
 .hero__actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 32px; }
-.hero__checks { display: flex; flex-wrap: wrap; gap: 10px 18px; margin-top: 24px; font-weight: 800; font-size: .95rem; }
+.hero__checks { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 22px; max-width: 500px; margin-top: 24px; font-weight: 800; font-size: .95rem; line-height: 1.35; }
+@media (max-width: 359px) { .hero__checks { grid-template-columns: 1fr; max-width: 260px; } }
 .hero__checks li, .check-list li { display: flex; align-items: flex-start; gap: 10px; }
 .hero__checks li::before, .check-list li::before {
   content: ""; flex: none; width: 24px; height: 24px; margin-top: 1px; border-radius: 50%;
@@ -333,14 +337,14 @@ main { overflow-x: clip; }
 .hero__blob {
   position: absolute; inset: 6% 2% 4% 8%;
   background: var(--yellow); border: var(--border); border-radius: 46% 54% 42% 58% / 52% 44% 56% 48%;
-  box-shadow: var(--shadow); transform: rotate(-6deg);
+  box-shadow: var(--shadow);
 }
 
 /* Celular */
 .phone {
   position: relative; width: min(300px, 78vw); aspect-ratio: 9 / 18.5;
   background: var(--ink); border-radius: 44px; padding: 12px;
-  box-shadow: 10px 10px 0 rgba(45, 52, 54, .25); transform: rotate(3deg);
+  box-shadow: 10px 10px 0 rgba(45, 52, 54, .25);
 }
 .phone__notch { position: absolute; top: 18px; left: 50%; width: 84px; height: 22px; margin-left: -42px; border-radius: 20px; background: var(--ink); z-index: 2; }
 .phone__screen { position: relative; height: 100%; border-radius: 34px; overflow: hidden; background: var(--cream); }
@@ -362,7 +366,7 @@ main { overflow-x: clip; }
 .phone__nfc svg { width: 54px; height: 54px; padding: 12px; border-radius: 50%; border: 2.5px solid currentColor; }
 
 /* A tag real (foto do portfólio) pendurada ao lado do celular */
-.hero__tag { position: absolute; left: 2%; bottom: 8%; width: 168px; z-index: 2; transform: rotate(-10deg); transform-origin: 50% 4%; }
+.hero__tag { position: absolute; left: 2%; bottom: 8%; width: 168px; z-index: 2; transform-origin: 50% 4%; }
 .hero__tag img { width: 100%; height: auto; filter: drop-shadow(0 16px 18px rgba(45, 52, 54, .28)); }
 .nfc-waves { position: absolute; right: -40px; top: 18%; width: 72px; height: 72px; pointer-events: none; }
 .nfc-waves i {
@@ -374,7 +378,7 @@ main { overflow-x: clip; }
   position: absolute; right: 0; top: 10%; max-width: 236px; z-index: 3;
   display: flex; gap: 10px; align-items: center;
   background: var(--white); border: var(--border); border-radius: 18px; box-shadow: var(--shadow-sm);
-  padding: 10px 14px; font-size: .9rem; line-height: 1.3; transform: rotate(4deg);
+  padding: 10px 14px; font-size: .9rem; line-height: 1.3;
 }
 .hero__toast b { display: block; font-family: var(--font-title); font-weight: 600; }
 .hero__toast small { color: var(--muted); font-size: .8rem; }
@@ -424,8 +428,8 @@ main { overflow-x: clip; }
 }
 .sticker--yellow { background: var(--yellow); }
 .sticker--lilac { background: var(--lilac); }
-.sticker--a { top: 24px; right: -28px; transform: rotate(6deg); }
-.sticker--b { bottom: 40px; left: -36px; transform: rotate(-5deg); }
+.sticker--a { top: 24px; right: -20px; }
+.sticker--b { bottom: 40px; left: -20px; }
 @media (max-width: 599px) {
   .sticker--a { right: -6px; top: 16px; font-size: .82rem; }
   .sticker--b { left: -6px; font-size: .82rem; }
@@ -443,8 +447,6 @@ main { overflow-x: clip; }
   font-family: var(--font-title); font-weight: 700; font-size: 1.5rem;
 }
 @media (min-width: 900px) {
-  /* o passo 2 desce um pouco para o caminho pontilhado formar uma onda */
-  .step:nth-child(2) { top: 28px; }
 }
 
 /* ---------- Lista de recursos ---------- */
@@ -467,7 +469,7 @@ main { overflow-x: clip; }
 .poster {
   width: min(340px, 100%); background: var(--white); color: var(--ink); text-align: center;
   border: var(--border); border-radius: 28px; box-shadow: 10px 10px 0 var(--ink);
-  padding: 22px 22px 24px; transform: rotate(-3deg);
+  padding: 22px 22px 24px;
 }
 .poster__badge {
   display: inline-block; background: var(--red-strong); color: #fff; font-family: var(--font-title); font-weight: 600;
@@ -556,7 +558,7 @@ main { overflow-x: clip; }
 .note svg { flex: none; color: var(--purple); }
 
 .vet-mock { display: grid; gap: 18px; width: min(400px, 100%); }
-.vet-code { text-align: center; background: var(--purple); color: var(--white); transform: rotate(-2deg); }
+.vet-code { text-align: center; background: var(--purple); color: var(--white); }
 .vet-code__label { font-weight: 800; font-size: .9rem; opacity: .9; }
 .vet-code__value {
   font-family: var(--font-title); font-weight: 700; font-size: clamp(1.7rem, 1.2rem + 2vw, 2.3rem); letter-spacing: .08em;
@@ -571,18 +573,19 @@ main { overflow-x: clip; }
 .vet-access__status { font-family: var(--font-body); font-weight: 900; font-size: .7rem; letter-spacing: .06em; text-transform: uppercase; background: var(--mint); color: var(--green-strong); border: 2px solid var(--green-strong); border-radius: 999px; padding: 1px 8px; }
 .vet-access__meta { color: var(--muted); font-size: .9rem; }
 .vet-access__revoke { display: block; margin-top: 14px; text-align: center; border: 2.5px solid var(--red-strong); color: var(--red-strong); border-radius: 999px; padding: 8px; font-family: var(--font-title); font-weight: 600; }
-.vet-entry { display: flex; gap: 12px; align-items: center; padding: 14px 18px; transform: rotate(1.5deg); }
+.vet-entry { display: flex; gap: 12px; align-items: center; padding: 14px 18px; }
 .vet-entry .dot { margin-top: 0; }
 
 /* ---------- Modelos ---------- */
 .models { display: grid; gap: 32px; align-items: stretch; }
 @media (min-width: 900px) { .models { grid-template-columns: repeat(3, 1fr); gap: 26px; } }
-.model { position: relative; display: flex; flex-direction: column; gap: 12px; padding: 18px 18px 22px; }
+.model { position: relative; display: flex; flex-direction: column; gap: 12px; padding: 18px 18px 22px; transition: transform 180ms var(--m-ease), box-shadow 180ms var(--m-ease); }
+@media (hover: hover) and (pointer: fine) { .model:hover { transform: translateY(-2px); box-shadow: 6px 8px 0 var(--ink); } .model--featured:hover { box-shadow: 8px 10px 0 var(--ink); } }
 .model--featured { border-width: 4px; box-shadow: 8px 8px 0 var(--ink); }
 .model__badge {
   position: absolute; z-index: 3; top: -16px; right: 18px;
   background: var(--yellow); border: var(--border); border-radius: 999px; box-shadow: 2px 2px 0 var(--ink);
-  font-family: var(--font-title); font-weight: 600; font-size: .9rem; padding: 4px 14px; transform: rotate(3deg);
+  font-family: var(--font-title); font-weight: 600; font-size: .9rem; padding: 4px 14px;
 }
 .model__art { display: grid; place-items: center; height: 220px; border: var(--border); border-radius: 18px; padding: 16px; overflow: hidden; }
 .model__art--orange { background: #FFE0BF; }
@@ -597,7 +600,7 @@ main { overflow-x: clip; }
 .model__features li::before { content: ""; flex: none; width: 10px; height: 10px; margin-top: 8px; border-radius: 50%; background: var(--ink); }
 .model__footer { margin-top: auto; padding-top: 12px; display: grid; gap: 12px; }
 .model__soon {
-  justify-self: start; font-family: var(--font-title); font-weight: 600; font-size: .85rem; letter-spacing: .05em; text-transform: uppercase;
+  justify-self: start; font-family: var(--font-title); font-weight: 600; font-size: .95rem;
   border: 2.5px dashed var(--ink); border-radius: 999px; padding: 4px 12px;
 }
 .models__note { text-align: center; margin-top: 40px; font-size: 1.1rem; }
@@ -606,20 +609,10 @@ main { overflow-x: clip; }
 .faq-wrap { display: grid; gap: 32px; }
 @media (min-width: 900px) { .faq-wrap { grid-template-columns: 0.8fr 1.2fr; align-items: start; } }
 .link { color: var(--green-strong); font-weight: 900; text-underline-offset: 4px; }
-.faq { display: grid; gap: 14px; }
-.faq__item { background: var(--cream); border: var(--border); border-radius: 20px; box-shadow: var(--shadow-sm); }
-.faq__item summary {
-  display: flex; align-items: center; justify-content: space-between; gap: 16px; cursor: pointer; list-style: none;
-  padding: 18px 20px; font-family: var(--font-title); font-weight: 600; font-size: 1.15rem;
-}
-.faq__item summary::-webkit-details-marker { display: none; }
-.faq__item summary::after {
-  content: "+"; display: grid; place-items: center; flex: none; width: 34px; height: 34px; border-radius: 50%;
-  border: 2.5px solid var(--ink); background: var(--yellow); font-size: 1.4rem; line-height: 1; transition: transform .2s ease;
-}
-.faq__item[open] summary::after { transform: rotate(45deg); }
-.faq__item summary:focus-visible { outline-offset: -4px; border-radius: 18px; }
-.faq__item p { padding: 0 20px 20px; color: var(--muted); }
+.faq { display: grid; gap: 0; border-top: var(--border); }
+.faq__item { padding: 18px 2px; border-bottom: 2px solid #E3DCC8; }
+.faq__item h3 { font-size: 1.15rem; font-weight: 600; }
+.faq__item p { margin-top: 6px; color: var(--muted); }
 
 /* ---------- CTA final ---------- */
 .final-cta__box {
@@ -641,88 +634,56 @@ main { overflow-x: clip; }
    Movimento
    ========================================================= */
 
-/* ---------- Momento focal do hero (skill Animate: choreograph) ----------
-   Tempo  | Elemento            | Papel     | Movimento
-   0      | blob                | decoração | só opacidade
-   0      | mascote             | lead      | sobe 16px + escala .94 → 1
-   120+   | letras do wordmark  | lead      | sobem 40%, atraso decrescente (não uniforme)
-   150    | celular             | lead      | sobe 48px, gira 6° → 3°
-   380    | subtítulo + frase   | apoio     | juntos, sobem 10px
-   480    | texto, botões, ✓    | apoio     | juntos, sobem 8px
-   650    | tag                 | lead      | balança no aro até encostar no celular
-   1450   | ondas NFC           | acento    | pulso no impacto, repete a cada 6s
-   1450   | tela bloqueada      | estático  | some (opacidade)
-   1450   | cartão do pet       | lead      | abre de baixo para cima (clip-path)
-   2050   | notificação         | apoio     | aparece com 10px de subida
-   Nada bloqueia clique: os botões ficam usáveis assim que aparecem. */
-.js .hero__blob { animation: fade-in 500ms linear both; }
-.js .brand-lockup__mascot { animation: rise-in 600ms var(--ease-out-expo) both; --rise: 16px; --from-scale: .94; }
-.js .wordmark__letter {
-  animation: letter-in 520ms var(--ease-out-expo) both;
-  animation-delay: calc(120ms + var(--i) * 62ms - var(--i) * var(--i) * 4ms);
-}
-.js .phone { animation: phone-in 700ms var(--ease-out-expo) 150ms both; }
-.js .hero__sub, .js .hero__tagline { animation: rise-in 500ms var(--ease-out-expo) 380ms both; --rise: 10px; }
-.js .hero__lead, .js .hero__actions, .js .hero__checks { animation: rise-in 500ms var(--ease-out-expo) 480ms both; --rise: 8px; }
-.js .hero__tag { animation: tag-swing 1100ms var(--ease-out-cubic) 650ms both; }
-.js .nfc-waves i { animation: nfc-burst 6s var(--ease-out-expo) 1450ms infinite; }
-.js .nfc-waves i:nth-child(2) { animation-delay: 1570ms; }
-.js .nfc-waves i:nth-child(3) { animation-delay: 1690ms; }
-.hero.is-offscreen .nfc-waves i { animation-play-state: paused; }
-.js .phone__lock { animation: fade-out 260ms ease-out 1450ms both; }
-.js .phone__card { animation: card-open 650ms var(--ease-out-expo) 1450ms both; }
-.js .hero__toast { animation: toast-in 450ms var(--ease-out-expo) 2050ms both; }
+/* ---------- Momento focal do hero (Animate: choreograph; Taste Skill: tech) ----------
+   O texto do topo já está no lugar no primeiro quadro. Só o visual se monta, uma vez,
+   e assenta em 1,5 s. Nada repete, então não precisa de botão de pausa.
+   Tempo  | Elemento        | Papel    | Movimento
+   0      | tag             | lead     | balança no aro até encostar no celular (900 ms)
+   780    | ondas NFC       | acento   | um pulso no impacto
+   820    | tela bloqueada  | estático | some (opacidade)
+   820    | cartão do pet   | lead     | abre de baixo para cima (clip-path, 520 ms)
+   1080   | notificação     | apoio    | aparece com 10px de subida (400 ms) */
+.js .hero__tag { animation: tag-swing 900ms var(--ease-out-cubic) both; }
+.js .nfc-waves i { animation: nfc-burst 700ms var(--ease-out-expo) 780ms both; }
+.js .nfc-waves i:nth-child(2) { animation-delay: 860ms; }
+.js .nfc-waves i:nth-child(3) { animation-delay: 940ms; }
+.js .phone__lock { animation: fade-out 240ms ease-out 820ms both; }
+.js .phone__card { animation: card-open 520ms var(--ease-out-expo) 820ms both; }
+.js .hero__toast { animation: toast-in 400ms var(--ease-out-expo) 1080ms both; }
 
 @keyframes fade-in { from { opacity: 0; } }
 @keyframes fade-out { to { opacity: 0; visibility: hidden; } }
-@keyframes rise-in { from { opacity: 0; transform: translateY(var(--rise, 12px)) scale(var(--from-scale, 1)); } }
-@keyframes letter-in { from { opacity: 0; transform: translateY(40%); } }
-@keyframes phone-in { from { opacity: 0; transform: translateY(48px) rotate(6deg); } to { opacity: 1; transform: rotate(3deg); } }
+@keyframes rise-in { from { opacity: 0; transform: translateY(var(--rise, 12px)); } }
 @keyframes tag-swing {
-  0% { opacity: 0; transform: translate(-36px, -70px) rotate(-48deg); }
-  35% { opacity: 1; }
-  62% { transform: translate(0, 0) rotate(6deg); }
-  82% { transform: rotate(-13deg); }
-  100% { transform: rotate(-10deg); }
+  0% { opacity: 0; transform: translate(-30px, -60px) rotate(-44deg); }
+  30% { opacity: 1; }
+  66% { transform: translate(0, 0) rotate(6deg); }
+  84% { transform: rotate(-3deg); }
+  100% { transform: none; }
 }
-@keyframes nfc-burst {
-  0% { transform: scale(.35); opacity: 0; }
-  3% { opacity: 1; }
-  16% { transform: scale(1.15); opacity: 0; }
-  100% { transform: scale(1.15); opacity: 0; }
-}
+@keyframes nfc-burst { 0% { transform: scale(.35); opacity: 0; } 20% { opacity: 1; } 100% { transform: scale(1.15); opacity: 0; } }
 @keyframes card-open { from { clip-path: inset(100% 0 0 0 round 34px); } to { clip-path: inset(0 0 0 0 round 34px); } }
-@keyframes toast-in { from { opacity: 0; transform: rotate(4deg) translateY(10px) scale(.96); } to { opacity: 1; transform: rotate(4deg); } }
+@keyframes toast-in { from { opacity: 0; transform: translateY(10px) scale(.96); } }
 
-/* ---------- Header compacto ao rolar ---------- */
-.nav-bar { transition: box-shadow var(--dur-enter) var(--ease-out-expo); }
-.nav-logo img { transition: transform var(--dur-enter) var(--ease-out-expo); transform-origin: left center; }
-.site-header.is-scrolled .nav-bar { box-shadow: 6px 6px 0 var(--ink); }
-.site-header.is-scrolled .nav-logo img { transform: scale(.88); }
-
-/* ---------- Camada única de hover (taste skill, regra 5) ----------
-   Só o que é clicável responde: botões sobem e afundam, links desenham o sublinhado,
-   perguntas do FAQ mudam o fundo. Cards que não são links ficam parados. */
+/* ---------- Camada de hover (Taste Skill: motion.md) ----------
+   Só o que é clicável responde. Botões sobem 1px e afundam ao clicar; links do menu e do
+   rodapé desenham um traço de 1px 4px abaixo da palavra; cards sem link ficam parados.
+   O cabeçalho é igual em qualquer posição da rolagem. */
 .footer-col a, .nav-app {
   background-image: linear-gradient(currentColor, currentColor);
-  background-repeat: no-repeat; background-position: 0 100%; background-size: 0% 2px;
-  transition: background-size 250ms var(--ease-out-expo), background-color var(--dur-hover) ease;
+  background-repeat: no-repeat; background-position: 0 calc(100% + 4px); background-size: 0% 1px;
+  transition: background-size 200ms var(--m-ease), background-color 200ms var(--m-ease);
+  padding-bottom: 4px;
 }
-.nav-app { background-position: 14px calc(100% - 8px); }
-@media (hover: hover) {
-  .footer-col a:hover { background-size: 100% 2px; text-decoration: none; }
-  .nav-app:hover { background-size: calc(100% - 28px) 2px; }
-  .link:hover, .final-cta__app:hover { text-decoration-thickness: 3px; }
-  .faq__item summary:hover { background: var(--white); }
+.nav-app { background-position: 14px calc(100% - 6px); }
+@media (hover: hover) and (pointer: fine) {
+  .footer-col a:hover { background-size: 100% 1px; transition-duration: 140ms; }
+  .nav-app:hover { background-size: calc(100% - 28px) 1px; transition-duration: 140ms; }
+  .link:hover, .final-cta__app:hover { text-decoration-thickness: 2px; }
 }
-.link, .final-cta__app { transition: text-decoration-thickness var(--dur-hover) ease; }
-.faq__item summary { border-radius: 18px; transition: background-color var(--dur-hover) ease; }
+.link, .final-cta__app { text-decoration-thickness: 1px; transition: text-decoration-thickness 140ms var(--m-ease); }
 
-/* ---------- FAQ: resposta entra suave ---------- */
-.faq__item[open] p { animation: rise-in var(--dur-enter) var(--ease-out-expo); --rise: 6px; }
-.faq__item summary::after { transition: transform 220ms var(--ease-out-expo); }
-
-/* ---------- Caminho que se desenha entre os passos ---------- */
+/* ---------- Caminho pontilhado entre os passos (estático) ---------- */
 .steps-wrap { position: relative; }
 .steps { position: relative; z-index: 1; }
 .steps__path { display: none; }
@@ -731,8 +692,6 @@ main { overflow-x: clip; }
     display: block; position: absolute; z-index: 2; left: 0; top: -40px;
     width: 100%; height: 90px; color: var(--ink); pointer-events: none;
   }
-  .js .steps__path { clip-path: inset(0 100% 0 0); transition: clip-path 1400ms var(--ease-in-out-cubic) 250ms; }
-  .js .steps-wrap.is-visible .steps__path { clip-path: inset(0 0 0 0); }
 }
 
 /* ---------- Interruptores do cartão (você decide o que aparece) ---------- */
@@ -772,23 +731,59 @@ html:not(.js) .tutor-panel { display: none; }
 .mock-field.is-off { grid-template-rows: 0fr; opacity: 0; transition-duration: 240ms, 160ms; }
 .mock-profile--full { padding-bottom: 18px; }
 
+/* =========================================================
+   Ritmo de telas (Taste Skill: layout-v4, seção 2) — desktop
+   O topo termina na dobra; cada seção seguinte ocupa uma tela de altura,
+   com o título 120px abaixo do topo da seção (48px abaixo do cabeçalho).
+   CTA final e rodapé são uma seção só. Em telas baixas a seção cresce
+   em vez de cortar o conteúdo.
+   ========================================================= */
+.final-cta { padding-bottom: clamp(48px, 7vw, 80px); }
+.site-footer.closing { padding-top: clamp(48px, 7vw, 80px); }
+
+@media (min-width: 1024px) {
+  /* Cartão do pet: painel de interruptores ao lado do cartão */
+  #cartao .split { grid-template-columns: .82fr 1.18fr; }
+  #cartao .profile-stage { width: auto; display: grid; grid-template-columns: minmax(0, 360px) 230px; gap: 22px; align-items: start; }
+  #cartao .tutor-panel { margin-top: 0; }
+  #cartao .sticker--a { right: 240px; }
+  /* Modelos mais compactos */
+  .model__art { height: 136px; padding: 12px; }
+  .model__name { font-size: 1.45rem; margin-top: 2px; }
+  #modelos .section-head, #duvidas .section-head, #cartao .section-head { margin-bottom: 32px; }
+  .faq__item { padding-block: 11px; }
+  .faq__item p { margin-top: 2px; font-size: 1rem; line-height: 1.5; }
+  #cartao .feature-list { gap: 14px; }
+  .mock-profile--full .mock-profile__cover { height: 96px; }
+  .mock-profile--full .mock-profile__box { margin-top: 10px; padding: 10px 12px; }
+  .mock-profile--full .mock-profile__likes { gap: 4px; }
+  .model { gap: 8px; }
+  .model__features { gap: 4px; font-size: .98rem; }
+  .model__footer { padding-top: 6px; gap: 10px; }
+}
+
+@media (min-width: 1024px) and (min-height: 720px) {
+  :root { --header-h: 84px; }
+  html { scroll-padding-top: 0; }
+  .site-header { height: var(--header-h); }
+  .hero { min-height: calc(100svh - var(--header-h)); padding-block: 16px 24px; display: flex; align-items: center; }
+  .hero > .container { width: 100%; }
+  main > .section { min-height: 100svh; padding-block: 120px 64px; }
+  .site-footer.closing { min-height: 100svh; padding-top: 120px; display: flex; flex-direction: column; justify-content: space-between; }
+  .site-footer.closing .final-cta { padding-bottom: 0; }
+}
+
 /* ---------- Movimento reduzido ----------
-   A coreografia colapsa: tudo aparece junto, só com opacidade, sem atraso e sem deslocamento.
-   Feedback de estado (cores, interruptores, campos do cartão) continua, sem movimento. */
+   O visual do topo aparece já montado (cartão aberto, notificação visível).
+   Cores e estados continuam mudando; nada se desloca. */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .js .hero__blob, .js .brand-lockup__mascot, .js .wordmark__letter, .js .phone, .js .hero__sub, .js .hero__tagline,
-  .js .hero__lead, .js .hero__actions, .js .hero__checks, .js .hero__tag, .js .hero__toast {
-    animation: fade-in 200ms ease-out both !important;
-  }
+  .js .hero__tag, .js .hero__toast { animation: fade-in 200ms ease-out both; }
   .js .phone__lock { display: none; }
   .js .phone__card { animation: none; clip-path: none; }
   .nfc-waves { display: none; }
-  .js .steps__path { clip-path: none; transition: none; }
-  .faq__item[open] p { animation: fade-in 150ms ease-out; }
-  .btn, .btn:hover, .btn:active, .btn .icon, .nav-logo img, .switch__thumb, .faq__item summary::after { transition-property: background-color, color, box-shadow; transform: none; }
+  .btn, .btn:hover, .btn:active, .nav-logo img, .switch__thumb { transition-property: background-color, color, box-shadow; transform: none; }
   .switch[aria-checked="true"] .switch__thumb { transform: translateX(20px); }
-  .faq__item[open] summary::after { transform: rotate(45deg); }
   .mock-field { transition: opacity 150ms linear; }
   .sticky-cta { transition: opacity 150ms linear; }
   .sticky-cta.is-hidden { transform: none; }

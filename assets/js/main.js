@@ -36,25 +36,10 @@
     });
   }
 
-  /* ---------- Caminho dos passos: desenha quando entra na tela ---------- */
-  var revealItems = document.querySelectorAll('[data-draw]');
-  if ('IntersectionObserver' in window) {
-    var revealObserver = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          revealObserver.unobserve(entry.target);
-        }
-      });
-    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
-    revealItems.forEach(function (el) { revealObserver.observe(el); });
-  } else {
-    revealItems.forEach(function (el) { el.classList.add('is-visible'); });
-  }
-
+  /* ---------- Barra fixa do celular: é o único 'Quero minha tag' fixo (o cabeçalho do celular não tem botão).
+     Some enquanto o botão do hero ou o CTA final estão na tela, para nunca haver dois iguais à vista. ---------- */
   var sticky = document.querySelector('[data-sticky-cta]');
   var finalCta = document.getElementById('cta-final');
-  /* ---------- CTA fixo: some enquanto o botão do hero ou o CTA final estão na tela ---------- */
   var heroActions = document.querySelector('.hero__actions');
   if (sticky && 'IntersectionObserver' in window) {
     var visibleCtas = new Set();
@@ -66,28 +51,6 @@
       sticky.classList.toggle('is-hidden', visibleCtas.size > 0);
     }, { threshold: 0.2 });
     [heroActions, finalCta].forEach(function (el) { if (el) ctaObserver.observe(el); });
-  }
-
-  /* ---------- Pulso NFC do hero pausa fora da tela (loop não essencial) ---------- */
-  var hero = document.querySelector('.hero');
-  if (hero && 'IntersectionObserver' in window) {
-    new IntersectionObserver(function (entries) {
-      hero.classList.toggle('is-offscreen', !entries[0].isIntersecting);
-    }).observe(hero);
-  }
-
-  /* ---------- Header compacto depois de rolar ---------- */
-  var header = document.querySelector('.site-header');
-  if (header) {
-    var ticking = false;
-    var updateHeader = function () {
-      header.classList.toggle('is-scrolled', window.scrollY > 24);
-      ticking = false;
-    };
-    window.addEventListener('scroll', function () {
-      if (!ticking) { ticking = true; window.requestAnimationFrame(updateHeader); }
-    }, { passive: true });
-    updateHeader();
   }
 
   /* ---------- Cartão do pet: interruptores mostram/escondem campos do mockup ---------- */

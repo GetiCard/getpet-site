@@ -9,8 +9,8 @@ $tagPhotos = [
 <section class="section" id="modelos" aria-labelledby="modelos-title">
   <div class="container">
     <div class="section-head section-head--center">
-      <h2 id="modelos-title">Escolha a tag do <span class="mark mark--cyan">seu jeito</span></h2>
-      <p class="lead">Três modelos, todos ligados ao mesmo app. O lançamento está chegando: chame no WhatsApp e garanta a sua.</p>
+      <h2 id="modelos-title">Três modelos de <span class="mark mark--cyan">tag Getpet</span></h2>
+      <p class="lead">Todos se integram ao app: Identificação, Saúde e Vet. O lançamento está chegando: chame no WhatsApp e garanta a sua.</p>
     </div>
 
     <ul class="models">
@@ -43,6 +43,5 @@ $tagPhotos = [
       <?php endforeach; ?>
     </ul>
 
-    <p class="models__note">Todos os modelos se integram ao app: <strong>Identificação</strong>, <strong>Saúde</strong> e <strong>Vet</strong>.</p>
   </div>
 </section>

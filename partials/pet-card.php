@@ -10,7 +10,7 @@ $profileFeatures = [
   <div class="container split">
     <div class="split__copy">
       <div class="section-head">
-        <h2 id="cartao-title">Um cartão que fala <span class="mark">pelo seu pet</span></h2>
+        <h2 id="cartao-title">O cartão que aparece para <span class="mark">quem encontra seu pet</span></h2>
         <p class="lead">Quando alguém lê a tag, abre o perfil público dele: quem ele é, como cuidar dele por alguns minutos e como encontrar você.</p>
       </div>
 

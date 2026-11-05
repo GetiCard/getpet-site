@@ -26,7 +26,7 @@ $timeline = [
   <div class="container split">
     <div class="split__copy">
       <div class="section-head">
-        <h2 id="saude-title">O prontuário do seu pet, <span class="mark mark--red">sempre no bolso</span></h2>
+        <h2 id="saude-title"><span class="mark mark--red">Prontuário de saúde</span> do pet no app</h2>
         <p class="lead">Chega de carteirinha perdida e exame no e-mail. Tudo sobre a saúde dele fica organizado no app, pronto para mostrar em qualquer consulta.</p>
       </div>
 

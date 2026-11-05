@@ -1,9 +1,9 @@
-<section class="section final-cta" id="cta-final" aria-labelledby="cta-final-title">
+<section class="final-cta" id="cta-final" aria-labelledby="cta-final-title">
   <div class="container">
     <div class="final-cta__box">
       <img class="final-cta__logo" src="assets/img/logo-getpet.webp" alt="" width="480" height="454" loading="lazy">
       <div class="final-cta__copy">
-        <h2 id="cta-final-title">Dê ao seu pet um caminho de volta para casa</h2>
+        <h2 id="cta-final-title">A tag Getpet chega em breve</h2>
         <p>A tag Getpet está chegando. Chame a gente no WhatsApp e seja um dos primeiros tutores a ter a sua.</p>
         <div class="final-cta__actions">
           <a class="btn btn--light" href="<?= e($wa) ?>"<?= link_attrs($wa) ?>>

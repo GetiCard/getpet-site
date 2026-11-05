@@ -3,8 +3,8 @@
   <div class="container split split--reverse">
     <div class="split__copy">
       <div class="section-head">
-        <h2 id="pet-perdido-title">Se o pior acontecer, o cartaz já está pronto</h2>
-        <p class="lead">Em um toque o Getpet monta um cartaz de busca com a foto, o QR Code e o seu telefone. É só postar.</p>
+        <h2 id="pet-perdido-title">Cartaz de pet perdido pronto em um toque</h2>
+        <p class="lead">O Getpet monta um cartaz de busca com a foto, o QR Code e o seu telefone. É só postar.</p>
       </div>
       <ul class="check-list">
         <li>Gerado na hora, a partir do perfil do pet</li>

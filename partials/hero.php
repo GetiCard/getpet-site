@@ -3,16 +3,16 @@
   <div class="container hero__grid">
     <div class="hero__copy">
       <div class="brand-lockup">
-        <img class="brand-lockup__mascot" src="assets/img/logo-mascot.webp" alt="" width="477" height="318">
+        <img class="brand-lockup__mascot" src="assets/img/logo-mascot.webp" alt="" width="311" height="298">
         <h1 id="hero-title" class="hero__title">
           <span class="wordmark" aria-hidden="true"><?php foreach ($brandLetters as $i => $letter): ?><span class="wordmark__letter" style="--i:<?= $i ?>"><?= e($letter) ?></span><?php endforeach; ?></span>
           <span class="sr-only">Getpet:</span>
-          <span class="hero__sub">A identidade digital do seu pet</span>
+          <span class="hero__sub">Tag de identificação com NFC e QR Code para cães e gatos</span>
         </h1>
       </div>
 
       <p class="hero__tagline">Se ele se perder, o caminho de volta está na <span class="mark mark--green">coleira.</span></p>
-      <p class="hero__lead lead">Uma tag com <strong>NFC e QR Code</strong>: quem encontrar seu pet aproxima o celular e vê, na hora, como falar com você.</p>
+      <p class="hero__lead lead">São <strong>3 modelos de tag</strong> para a coleira. Quem encontrar seu pet lê a tag com o celular e vê, na hora, como falar com você.</p>
 
       <div class="hero__actions">
         <a class="btn btn--primary" href="<?= e($wa) ?>"<?= link_attrs($wa) ?>>
@@ -26,6 +26,7 @@
         <li>Sem app para quem encontra</li>
         <li>Funciona em qualquer celular</li>
         <li>Você decide o que aparece</li>
+        <li>Prontuário de saúde no app</li>
       </ul>
     </div>
 

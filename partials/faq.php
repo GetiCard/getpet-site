@@ -29,16 +29,16 @@ $faq = [
 <section class="section section--band" id="duvidas" aria-labelledby="duvidas-title">
   <div class="container faq-wrap">
     <div class="section-head">
-      <h2 id="duvidas-title">Perguntas que todo tutor faz</h2>
+      <h2 id="duvidas-title">Perguntas frequentes</h2>
       <p class="lead">Não achou a sua? <a class="link" href="<?= e($wa) ?>"<?= link_attrs($wa) ?>>Chame no WhatsApp</a>.</p>
     </div>
 
     <div class="faq">
       <?php foreach ($faq as $item): ?>
-        <details class="faq__item">
-          <summary><?= e($item['q']) ?></summary>
+        <article class="faq__item">
+          <h3><?= e($item['q']) ?></h3>
           <p><?= e($item['a']) ?></p>
-        </details>
+        </article>
       <?php endforeach; ?>
     </div>
   </div>

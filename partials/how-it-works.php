@@ -23,12 +23,12 @@ $steps = [
 <section class="section" id="como-funciona" aria-labelledby="como-funciona-title">
   <div class="container">
     <div class="section-head section-head--center">
-      <h2 id="como-funciona-title">Três passos entre o susto e o <span class="mark">reencontro</span></h2>
+      <h2 id="como-funciona-title">Como a tag funciona, em <span class="mark">3 passos</span></h2>
     </div>
 
-    <div class="steps-wrap" data-draw>
+    <div class="steps-wrap">
     <svg class="steps__path" viewBox="0 0 1000 90" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-      <path d="M273 44 C 380 -14, 520 -6, 615 72 C 700 0, 860 -14, 957 44" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="1 12" vector-effect="non-scaling-stroke"/>
+      <path d="M273 44 C 380 -16, 510 -16, 615 44 C 720 -16, 850 -16, 957 44" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="1 12" vector-effect="non-scaling-stroke"/>
     </svg>
     <ol class="steps">
       <?php foreach ($steps as $i => $step): ?>

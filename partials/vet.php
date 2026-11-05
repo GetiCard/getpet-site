@@ -9,7 +9,7 @@ $vetSteps = [
   <div class="container split">
     <div class="split__copy">
       <div class="section-head">
-        <h2 id="vet-title">O veterinário escreve no prontuário. <span class="mark mark--purple">Você decide</span> até quando.</h2>
+        <h2 id="vet-title">Acesso do veterinário ao prontuário, <span class="mark mark--purple">pelo tempo que você escolher</span></h2>
         <p class="lead">O histórico do seu pet acompanha ele de clínica em clínica, e quem cuida dele registra tudo direto no app.</p>
       </div>
 

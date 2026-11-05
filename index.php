@@ -16,11 +16,10 @@ $sections = [
     'vet',
     'models',
     'faq',
-    'final-cta',
 ];
 ?>
 <!doctype html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-type="product">
 <?php include __DIR__ . '/partials/head.php'; ?>
 <body>
 <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>

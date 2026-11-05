@@ -19,6 +19,8 @@ if ($base === '' && $requestBase === '') {
 <title><?= e($title) ?></title>
 <meta name="description" content="<?= e($description) ?>">
 <meta name="theme-color" content="#FFF9E6">
+<meta name="page-type" content="product">
+<meta name="site-kind" content="tech">
 
 <meta property="og:type" content="website">
 <meta property="og:locale" content="pt_BR">

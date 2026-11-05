@@ -1,4 +1,5 @@
-<footer class="site-footer">
+<footer class="site-footer closing">
+<?php include __DIR__ . '/final-cta.php'; ?>
   <div class="container footer-grid">
     <div class="footer-brand">
       <img src="assets/img/logo-getpet.webp" alt="Getpet" width="480" height="454" loading="lazy">
@@ -6,7 +7,7 @@
     </div>
 
     <nav class="footer-col" aria-label="Rodapé">
-      <h2 class="footer-title">Navegue</h2>
+      <p class="footer-title">Navegue</p>
       <ul>
         <li><a href="#como-funciona">Como funciona</a></li>
         <li><a href="#saude">GetPet Saúde</a></li>
@@ -17,7 +18,7 @@
     </nav>
 
     <div class="footer-col">
-      <h2 class="footer-title">Fale com a gente</h2>
+      <p class="footer-title">Fale com a gente</p>
       <ul>
         <li><a href="<?= e($wa) ?>"<?= link_attrs($wa) ?>>WhatsApp</a></li>
         <?php $instagram = ltrim((string) $config['instagram'], '@'); ?>
